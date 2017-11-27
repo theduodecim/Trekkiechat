@@ -58,4 +58,6 @@ export class ChatsPage {
     this.navCtrl.push('BuddychatPage');
   }
 
+
+
 }

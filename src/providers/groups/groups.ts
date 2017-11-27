@@ -60,11 +60,10 @@ export class GroupsProvider {
       })
     }
   }
-
   getownership(groupname) {
-    var promise = new Promise((resolve, reject) => {
-      this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) => {
-        var temp = snapshot.val().owner;
+    let promise = new Promise((resolve, reject) => {
+      this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) => { // let
+        let temp = snapshot.val().owner; // let
         if (temp == firebase.auth().currentUser.uid) {
           resolve(true);
         }
@@ -113,21 +112,20 @@ export class GroupsProvider {
 
   getgroupmembers() {
     this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).once('value', (snapshot) => {
-      var tempdata = snapshot.val().owner;
+      let tempdata = snapshot.val().owner; // let
       this.firegroup.child(tempdata).child(this.currentgroupname).child('members').once('value', (snapshot) => {
-        var tempvar = snapshot.val();
-        for (var key in tempvar) {
+        let tempvar = snapshot.val(); // let
+        for (let key in tempvar) { // let
           this.currentgroup.push(tempvar[key]);
         }
       })
     })
     this.events.publish('gotmembers');
   }
-
   leavegroup() {
     return new Promise((resolve, reject) => {
       this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).once('value', (snapshot) => {
-        var tempowner = snapshot.val().owner;
+        let tempowner = snapshot.val().owner; //let
         this.firegroup.child(tempowner).child(this.currentgroupname).child('members').orderByChild('uid')
           .equalTo(firebase.auth().currentUser.uid).once('value', (snapshot) => {
           snapshot.ref.remove().then(() => {
@@ -143,6 +141,90 @@ export class GroupsProvider {
       })
     })
   }
+  deletegroup() {
+    return new Promise((resolve, reject) => {
+      this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('members').once('value', (snapshot) => {
+        let tempmembers = snapshot.val(); // let
+
+        for (let key in tempmembers) { // let
+          this.firegroup.child(tempmembers[key].uid).child(this.currentgroupname).remove();
+        }
+
+        this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).remove().then(() => {
+          resolve(true);
+        }).catch((err) => {
+          reject(err);
+        })
+
+      })
+    })
+  }
+  addgroupmsg(newmessage) {
+    return new Promise((resolve) => {
+
+      this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('owner').once('value', (snapshot) => {
+        let tempowner = snapshot.val(); // let
+        this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('msgboard').push({
+          sentby: firebase.auth().currentUser.uid,
+          displayName: firebase.auth().currentUser.displayName,
+          photoURL: firebase.auth().currentUser.photoURL,
+          message: newmessage,
+          timestamp: firebase.database.ServerValue.TIMESTAMP
+        }).then(() => {
+          if (tempowner != firebase.auth().currentUser.uid) {
+            this.firegroup.child(tempowner).child(this.currentgroupname).child('msgboard').push({
+              sentby: firebase.auth().currentUser.uid,
+              displayName: firebase.auth().currentUser.displayName,
+              photoURL: firebase.auth().currentUser.photoURL,
+              message: newmessage,
+              timestamp: firebase.database.ServerValue.TIMESTAMP
+            })
+          }
+          let tempmembers = []; // let
+          this.firegroup.child(tempowner).child(this.currentgroupname).child('members').once('value', (snapshot) => { // let
+            let tempmembersobj = snapshot.val(); // let
+            for (let key in tempmembersobj) // let
+              tempmembers.push(tempmembersobj[key]);
+          }).then(() => {
+            let postedmsgs = tempmembers.map((item) => {
+              if (item.uid != firebase.auth().currentUser.uid) {
+                return new Promise((resolve) => {
+                  this.postmsgs(item, newmessage, resolve);
+                })
+              }
+            })
+            Promise.all(postedmsgs).then(() => {
+              this.getgroupmsgs(this.currentgroupname);
+              resolve(true);
+            })
+          })
+        })
+      })
+    })
+  }
+   // espisode 16
+  postmsgs(member, msg, cb) {
+    this.firegroup.child(member.uid).child(this.currentgroupname).child('msgboard').push({
+      sentby: firebase.auth().currentUser.uid,
+      displayName: firebase.auth().currentUser.displayName,
+      photoURL: firebase.auth().currentUser.photoURL,
+      message: msg,
+      timestamp: firebase.database.ServerValue.TIMESTAMP
+    }).then(() => {
+      cb();
+    })
+  }
+  getgroupmsgs(groupname) {
+    this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).child('msgboard').on('value', (snapshot) => {
+      let tempmsgholder = snapshot.val(); // let
+      this.groupmsgs = [];
+      for (let key in tempmsgholder) // let
+      this.groupmsgs.push(tempmsgholder[key]);
+      this.events.publish('newgroupmsg');
+    })
+
+  }
+
 
 
 

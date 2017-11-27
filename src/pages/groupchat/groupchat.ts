@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, LoadingController, Content, Events } from 'ionic-angular';
 import { GroupsProvider } from '../../providers/groups/groups';
+import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
+import firebase from 'firebase';
 
 /**
  * Generated class for the GroupchatPage page.
@@ -14,10 +16,18 @@ import { GroupsProvider } from '../../providers/groups/groups';
   templateUrl: 'groupchat.html',
 })
 export class GroupchatPage {
+  @ViewChild('content') content: Content;
   owner: boolean = false;
   groupName;
+  newmessage;
+  allgroupmsgs;
+  alignuid;
+  photoURL;
+  imgornot;
   constructor(public navCtrl: NavController, public navParams: NavParams, public groupservice: GroupsProvider,
-              public actionSheet: ActionSheetController) {
+              public actionSheet: ActionSheetController, public events: Events, public imgstore: ImghandlerProvider, public loadingCtrl: LoadingController) {
+    this.alignuid = firebase.auth().currentUser.uid;
+    this.photoURL = firebase.auth().currentUser.photoURL;
     this.groupName = this.navParams.get('groupName');
     this.groupservice.getownership(this.groupName).then((res) => {
       if (res)
@@ -25,11 +35,57 @@ export class GroupchatPage {
     }).catch((err) => {
       alert(err);
     })
+    this.groupservice.getgroupmsgs(this.groupName);
+    this.events.subscribe('newgroupmsg', () => {
+      this.allgroupmsgs = [];
+      this.imgornot = [];
+      this.allgroupmsgs = this.groupservice.groupmsgs;
+      for (let key in this.allgroupmsgs) { // let
+        let d = new Date(this.allgroupmsgs[key].timestamp); // let
+        let hours = d.getHours(); // let
+        let minutes = "0" + d.getMinutes(); // let
+        let month = d.getMonth(); // let
+        let da = d.getDate(); // let
+
+        let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        let formattedTime = monthNames[month] + "-" + da + "-" + hours + ":" + minutes.substr(-2);
+
+        this.allgroupmsgs[key].timestamp = formattedTime;
+        if (this.allgroupmsgs[key].message.substring(0, 4) === 'http') {
+          this.imgornot.push(true);
+        }
+        else {
+          this.imgornot.push(false);
+        }
+      }
+      this.scrollto();
+    })
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupchatPage');
   }
+
+  sendpicmsg() {
+    let loader = this.loadingCtrl.create({
+      content: 'Please wait'
+    });
+    loader.present();
+    this.imgstore.picmsgstore().then((imgurl) => {
+      loader.dismiss();
+      this.groupservice.addgroupmsg(imgurl).then(() => {
+        this.scrollto();
+        this.newmessage = '';
+      })
+    }).catch((err) => {
+      alert(err);
+      loader.dismiss();
+    })
+  }
+
   presentOwnerSheet() {
     let sheet = this.actionSheet.create({
       title: 'Group Actions',
@@ -52,14 +108,18 @@ export class GroupchatPage {
           text: 'Group Info',
           icon: 'person',
           handler: () => {
-            this.navCtrl.push('GroupinfoPage', {groupName: this.groupName});
+            this.navCtrl.push('GroupinfoPage', {groupName: this.groupName}); // ep 15
           }
         },
         {
           text: 'Delete Group',
           icon: 'trash',
           handler: () => {
-            //this.groupservice.deletegroup();
+            this.groupservice.deletegroup().then(() => { // ep 15
+              this.navCtrl.pop();
+            }).catch((err) => {
+              console.log(err);
+            })
           }
         },
         {
@@ -83,7 +143,7 @@ export class GroupchatPage {
           text: 'Leave Group',
           icon: 'log-out',
           handler: () => {
-            this.groupservice.leavegroup().then(() => { //adding this in the episode 15
+            this.groupservice.leavegroup().then(() => {
               this.navCtrl.pop();
             }).catch((err) => {
               console.log(err);
@@ -108,6 +168,19 @@ export class GroupchatPage {
       ]
     })
     sheet.present();
+  }
+
+  addgroupmsg() {
+    this.groupservice.addgroupmsg(this.newmessage).then(() => {
+      this.scrollto();
+      this.newmessage = '';
+    })
+  }
+
+  scrollto() {
+    setTimeout(() => {
+      this.content.scrollToBottom();
+    }, 1000);
   }
 
 }
