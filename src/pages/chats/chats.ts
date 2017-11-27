@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ChatsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {AlertController, Events, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {RequestsProvider} from "../../providers/requests/requests";
 
 @IonicPage()
 @Component({
@@ -14,16 +8,54 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chats.html',
 })
 export class ChatsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  myrequests;
+  myfriends;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public requestservice: RequestsProvider, public events: Events, public alertCtrl: AlertController) {
   }
 
-  tab1: string = "ChatsPage";
-  tab2: string = "GroupsPage";
-  tab3: string = "ProfilePage";
+  ionViewWillEnter() { // theory in the ep6
+    this.requestservice.getmyrequests();
+    this.events.subscribe('gotrequests', () => {
+      this.myrequests = [];
+      this.myrequests = this.requestservice.userdetails;
+    })
+    this.events.subscribe('friends', () => {
+      this.myfriends = [];
+      this.myfriends = this.requestservice.myfriends;
+    })
+  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatsPage');
+  ionViewDidLeave() {
+    this.events.unsubscribe('gotrequests');
+  }
+
+  addbuddy() {
+    this.navCtrl.push('BuddiesPage');
+  }
+
+  accept(item) {  //ep 7
+    this.requestservice.acceptrequest(item).then(() => {
+
+      let newalert = this.alertCtrl.create({
+        title: 'Friend added',
+        subTitle: 'Tap on the friend to chat with him',
+        buttons: ['Okay']
+      });
+      newalert.present();
+    })
+  }
+
+  ignore(item) {
+    this.requestservice.deleterequest(item).then(() => {
+      alert('Request ignored');
+    }).catch((err) => {
+      alert(err);
+    })
+  }
+
+  buddychat(buddy) { // ep 8
+    this.chatservice.initializebuddy(buddy);
+    this.navCtrl.push('BuddychatPage');
   }
 
 }

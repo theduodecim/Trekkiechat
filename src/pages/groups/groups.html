@@ -1,3 +1,5 @@
+
+
 <!--
   Generated template for the GroupsPage page.
 
@@ -6,13 +8,94 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>groups</ion-title>
+  <ion-navbar color="hcolor">
+    <ion-title>Groups</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addgroup()">
+        <ion-icon name="contacts"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list no-lines>
+    <ion-list-header>
+      My Groups
+    </ion-list-header>
+    <ion-item *ngFor="let item of allmygroups">
+      <ion-avatar item-left>
+        <img src="{{item.groupimage}}">
+      </ion-avatar>
+      <h3 (click)="openchat(item)">{{item.groupName}}</h3>
+    </ion-item>
+  </ion-list>
+</ion-content>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+<!--
+  Generated template for the GroupsPage page.
 
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="hcolor">
+    <ion-title>Groups</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addgroup()">
+        <ion-icon name="contacts"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list no-lines>
+    <ion-list-header>
+      My Groups
+    </ion-list-header>
+    <ion-item *ngFor="let item of allmygroups">
+      <ion-avatar item-left>
+        <img src="{{item.groupimage}}">
+      </ion-avatar>
+      <h3 (click)="openchat(item)">{{item.groupName}}</h3>
+    </ion-item>
+  </ion-list>
 </ion-content>
