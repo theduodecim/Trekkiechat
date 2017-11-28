@@ -18,21 +18,24 @@ export class SignupPage {
     password: '',
     displayName: ''
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userservice: UserProvider,
-              public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public userservice: UserProvider,
+              public loadingCtrl: LoadingController,
+              public toastCtrl: ToastController) {
   }
 
   signup() {
-    var toaster = this.toastCtrl.create({
+    let toaster = this.toastCtrl.create({
       duration: 3000,
       position: 'bottom'
     });
     if (this.newuser.email == '' || this.newuser.password == '' || this.newuser.displayName == '') {
-      toaster.setMessage('All fields are required dude');
+      toaster.setMessage('All fields are required dude'); // check this
       toaster.present();
     }
     else if (this.newuser.password.length < 7) {
-      toaster.setMessage('Password is not strong. Try giving more than six characters');
+      toaster.setMessage('Password is not strong. Try giving more than six characters'); //check this
       toaster.present();
     }
     else {
@@ -40,12 +43,17 @@ export class SignupPage {
         content: 'Please wait'
       });
       loader.present();
-      this.userservice.adduser(this.newuser).then((res: any) => { //this is for create a new using the user provider
+      this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          this.navCtrl.push('ProfilePage');
-        else
+          this.navCtrl.push('ChatsPage'); // check this!
+        else {
+          let loader = this.loadingCtrl.create({
+            content: 'Se cago todo'
+          });
+          loader.present();
           alert('Error' + res);
+        }
       })
     }
   }

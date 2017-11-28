@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, LoadingController, Content, Events } from 'ionic-angular';
 import { GroupsProvider } from '../../providers/groups/groups';
-import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
+/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
 import firebase from 'firebase';
 
 /**
@@ -24,8 +24,17 @@ export class GroupchatPage {
   alignuid;
   photoURL;
   imgornot;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public groupservice: GroupsProvider,
-              public actionSheet: ActionSheetController, public events: Events, public imgstore: ImghandlerProvider, public loadingCtrl: LoadingController) {
+
+
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public groupservice: GroupsProvider,
+              public actionSheet: ActionSheetController,
+              public events: Events,
+              /*public imgstore: ImghandlerProvider,*/
+              public loadingCtrl: LoadingController) {
+
     this.alignuid = firebase.auth().currentUser.uid;
     this.photoURL = firebase.auth().currentUser.photoURL;
     this.groupName = this.navParams.get('groupName');
@@ -69,7 +78,7 @@ export class GroupchatPage {
     console.log('ionViewDidLoad GroupchatPage');
   }
 
-  sendpicmsg() {
+  /*sendpicmsg() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'
     });
@@ -84,7 +93,7 @@ export class GroupchatPage {
       alert(err);
       loader.dismiss();
     })
-  }
+  }*/
 
   presentOwnerSheet() {
     let sheet = this.actionSheet.create({

@@ -11,7 +11,7 @@
   </ion-item>
     <div class="spacer" style="height: 5px;"></div>
     <ion-item>
-      <ion-input type="password" placeholder="password"></ion-input>
+      <ion-input type="password" placeholder="password" [(ngModel)]="credentials.password"></ion-input>
     </ion-item>
     <div class="spacer" style="height: 10px;"></div>
     <a (click)="passwordreset()">Forgot login details ? <b> Get help </b></a>

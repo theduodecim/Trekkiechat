@@ -24,7 +24,7 @@ export class UserProvider {
    */
 
   adduser(newuser) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => { // let
       this.afireauth.auth.createUserWithEmailAndPassword(newuser.email, newuser.password).then(() => {
         this.afireauth.auth.currentUser.updateProfile({
           displayName: newuser.displayName,
@@ -59,7 +59,7 @@ export class UserProvider {
    */
 
   passwordreset(email) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => { // let
       firebase.auth().sendPasswordResetEmail(email).then(() => {
         resolve({ success: true });
       }).catch((err) => {
@@ -80,7 +80,7 @@ export class UserProvider {
   */
 
  updateimage(imageurl) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => { // let
       this.afireauth.auth.currentUser.updateProfile({
         displayName: this.afireauth.auth.currentUser.displayName,
         photoURL: imageurl
@@ -103,7 +103,7 @@ export class UserProvider {
 
 
   getuserdetails() {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => { // let
       this.firedata.child(firebase.auth().currentUser.uid).once('value', (snapshot) => {
         resolve(snapshot.val());
       }).catch((err) => {
@@ -114,7 +114,7 @@ export class UserProvider {
   }
 
   updatedisplayname(newname) {
-    var promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => { // let
       this.afireauth.auth.currentUser.updateProfile({
         displayName: newname,
         photoURL: this.afireauth.auth.currentUser.photoURL
@@ -137,11 +137,11 @@ export class UserProvider {
 
 
   getallusers() {
-  var promise = new Promise((resolve, reject) => {
+  let promise = new Promise((resolve, reject) => { //let
     this.firedata.orderByChild('uid').once('value', (snapshot) => {
       let userdata = snapshot.val();
       let temparr = [];
-      for (var key in userdata) {
+      for (let key in userdata) { // let
         temparr.push(userdata[key]);
       }
       resolve(temparr);

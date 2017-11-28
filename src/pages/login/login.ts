@@ -19,7 +19,9 @@ import * as firebase from "firebase";
 })
 export class LoginPage {
   credentials = {} as usercreds;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public authservice: AuthProvider) {
   }
 
   ionViewDidLoad() {

@@ -15,7 +15,7 @@ export class RequestsProvider {
   firereq = firebase.database().ref('/requests');
   userdetails;
   myfriends;
-
+  firefriends = firebase.database().ref('/friends');
   constructor(public userservice: UserProvider, public events: Events) {
 
   }
@@ -58,8 +58,8 @@ export class RequestsProvider {
   }
 
   acceptrequest(buddy) {
-    let myfriends = []; // let
-    let promise = new Promise((resolve, reject) => { // let
+    let promise = new Promise((resolve, reject) => {
+      this.myfriends = [];
       this.firefriends.child(firebase.auth().currentUser.uid).push({
         uid: buddy.uid
       }).then(() => {
@@ -69,13 +69,14 @@ export class RequestsProvider {
           this.deleterequest(buddy).then(() => {
             resolve(true);
           })
-
-        }).catch((err) => {
+        })
+      })
+       /* }).catch((err) => {
           reject(err);
         })
       }).catch((err) => {
         reject(err);
-      })
+      })*/
     })
     return promise;
   }

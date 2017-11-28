@@ -10,7 +10,7 @@ import {AngularFireModule} from "angularfire2";
 import {config} from "./app.firebaseconfig";
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
-import { ImghandlerProvider } from '../providers/imghandler/imghandler';
+/*import { ImghandlerProvider } from '../providers/imghandler/imghandler';*/
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -42,7 +42,7 @@ import { GroupsProvider } from '../providers/groups/groups';
      AngularFireAuth,
     AuthProvider,
     UserProvider,
-    ImghandlerProvider,
+/*    ImghandlerProvider,*/
     RequestsProvider,
     ChatProvider,
     GroupsProvider

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+/*import { HttpClient } from '@angular/common/http';*/
 import { Injectable } from '@angular/core';
 import * as firebase from "firebase";
 import {Events} from "ionic-angular";
@@ -14,7 +14,7 @@ export class ChatProvider { //episode 8
   buddy: any; // dont forget
   firebuddychats = firebase.database().ref('/buddychats');
   buddymessages = [];
-  constructor(public http: HttpClient, public events: Events) {
+  constructor(public events: Events) {
     console.log('Hello ChatProvider Provider');
   }
 

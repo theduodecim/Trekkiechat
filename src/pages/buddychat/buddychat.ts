@@ -1,7 +1,7 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content, LoadingController } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
-import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
+/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
 import firebase from 'firebase';
 /**
  * Generated class for the BuddychatPage page.
@@ -21,9 +21,14 @@ export class BuddychatPage {
   allmessages = [];
   photoURL;
   imgornot;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public chatservice: ChatProvider,
-              public events: Events, public zone: NgZone, public loadingCtrl: LoadingController,
-              public imgstore: ImghandlerProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public chatservice: ChatProvider,
+              public events: Events,
+              public zone: NgZone,
+              public loadingCtrl: LoadingController
+              /*public imgstore: ImghandlerProvider*/) {
+
     this.buddy = this.chatservice.buddy;
     this.photoURL = firebase.auth().currentUser.photoURL;
     this.scrollto();
@@ -61,7 +66,7 @@ export class BuddychatPage {
     }, 1000);
   }
 
-  sendPicMsg() {
+ /* sendPicMsg() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'
     });
@@ -76,5 +81,5 @@ export class BuddychatPage {
       alert(err);
       loader.dismiss();
     })
-  }
+  }*/
 }

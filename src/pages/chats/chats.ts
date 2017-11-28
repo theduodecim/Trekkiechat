@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController, Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {RequestsProvider} from "../../providers/requests/requests";
+import {ChatProvider} from "../../providers/chat/chat";
 
 @IonicPage()
 @Component({
@@ -10,7 +11,12 @@ import {RequestsProvider} from "../../providers/requests/requests";
 export class ChatsPage {
   myrequests;
   myfriends;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public requestservice: RequestsProvider, public events: Events, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public requestservice: RequestsProvider,
+              public events: Events,
+              public alertCtrl: AlertController,
+              public chatservice: ChatProvider) {
   }
 
   ionViewWillEnter() { // theory in the ep6

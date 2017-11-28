@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
+/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
 import { UserProvider } from '../../providers/user/user';
 /**
  * Generated class for the ProfilepicPage page.
@@ -15,15 +15,20 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class ProfilepicPage {
   imgurl = 'https://firebasestorage.googleapis.com/v0/b/myapp-4eadd.appspot.com/o/chatterplace.png?alt=media&token=e51fa887-bfc6-48ff-87c6-e2c61976534e';
-  moveon = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public imgservice: ImghandlerProvider,
-              public zone: NgZone, public userservice: UserProvider, public loadingCtrl: LoadingController) {
+  moveon: boolean = true;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+             /* public imgservice: ImghandlerProvider,*/
+              public zone: NgZone,
+              public userservice: UserProvider,
+              public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
+    // console.log('ionViewDidLoad ProfilepicPage');
   }
 
-  chooseimage() {
+ /* chooseimage() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'
     })
@@ -36,7 +41,7 @@ export class ProfilepicPage {
       })
     })
   }
-
+*/
   updateproceed() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'

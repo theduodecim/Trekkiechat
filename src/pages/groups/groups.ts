@@ -14,8 +14,11 @@ import { GroupsProvider } from '../../providers/groups/groups';
 })
 export class GroupsPage {
   allmygroups;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
-              public loadingCtrl: LoadingController, public groupservice: GroupsProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public events: Events,
+              public loadingCtrl: LoadingController,
+              public groupservice: GroupsProvider) {
   }
 
   ionViewWillEnter() {

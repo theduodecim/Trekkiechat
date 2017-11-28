@@ -12,6 +12,11 @@ import firebase from 'firebase';
 export class GroupsProvider {
   firegroup = firebase.database().ref('/groups');
   mygroups: Array<any> = [];
+  currentgroup: Array<any> = [];
+  currentgroupname;
+  grouppic;
+  groupmsgs;
+
   constructor(public events: Events) {
 
   }

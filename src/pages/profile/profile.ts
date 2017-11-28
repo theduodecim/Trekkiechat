@@ -1,8 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
-import {ImghandlerProvider} from "../../providers/imghandler/imghandler";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -17,9 +17,12 @@ import {ImghandlerProvider} from "../../providers/imghandler/imghandler";
 export class ProfilePage {
   avatar: string;
   displayName: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public userservice: UserProvider, public zone: NgZone, public alertCtrl: AlertController,
-              public imghandler: ImghandlerProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public userservice: UserProvider,
+              public zone: NgZone,
+              public alertCtrl: AlertController
+              /*public imghandler: ImghandlerProvider*/) {
   }
 
   ionViewWillEnter() {
@@ -35,7 +38,7 @@ export class ProfilePage {
     })
   }
 
-  editimage() {
+ /* editimage() {
     let statusalert = this.alertCtrl.create({
       buttons: ['okay']
     });
@@ -55,7 +58,7 @@ export class ProfilePage {
         statusalert.present();
       })
     })
-  }
+  }*/
 
   editname() {
     let statusalert = this.alertCtrl.create({

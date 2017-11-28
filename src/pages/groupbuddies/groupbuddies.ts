@@ -14,8 +14,11 @@ export class GroupbuddiesPage {
   searchstring;
   tempmyfriends = [];
   newbuddy;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public requestservice: RequestsProvider,
-              public events: Events, public groupservice: GroupsProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public requestservice: RequestsProvider,
+              public events: Events,
+              public groupservice: GroupsProvider) {
   }
 
   ionViewWillEnter() {

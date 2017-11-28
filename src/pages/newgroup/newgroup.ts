@@ -28,7 +28,7 @@ export class NewgroupPage {
     console.log('ionViewDidLoad NewgroupPage');
   }
 
-  chooseimage() {
+ /* chooseimage() {
     if (this.newgroup.groupName == 'GroupName') {
       let namealert = this.alertCtrl.create({
         buttons: ['okay'],
@@ -50,7 +50,7 @@ export class NewgroupPage {
       })
     }
 
-  }
+  }*/
 
   creategroup() {
     this.groupservice.addgroup(this.newgroup).then(() => {
