@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
+import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
 import { UserProvider } from '../../providers/user/user';
 /**
  * Generated class for the ProfilepicPage page.
@@ -18,7 +18,7 @@ export class ProfilepicPage {
   moveon: boolean = true;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-             /* public imgservice: ImghandlerProvider,*/
+              public imgservice: ImghandlerProvider,
               public zone: NgZone,
               public userservice: UserProvider,
               public loadingCtrl: LoadingController) {
@@ -28,7 +28,7 @@ export class ProfilepicPage {
     // console.log('ionViewDidLoad ProfilepicPage');
   }
 
- /* chooseimage() {
+ chooseimage() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'
     })
@@ -41,7 +41,7 @@ export class ProfilepicPage {
       })
     })
   }
-*/
+
   updateproceed() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'

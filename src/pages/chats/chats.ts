@@ -14,15 +14,18 @@ export class ChatsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public requestservice: RequestsProvider,
-              public events: Events,
+              public events: Events, //Events is a publish-subscribe
+              // style event system for sending and responding
+              // to application-level events across your app.
               public alertCtrl: AlertController,
               public chatservice: ChatProvider) {
   }
 
-  ionViewWillEnter() { // theory in the ep6
-    this.requestservice.getmyrequests();
-    this.events.subscribe('gotrequests', () => {
-      this.myrequests = [];
+  ionViewWillEnter() { // call when we enter to this page
+    this.requestservice.getmyrequests(); // this will get our request
+    this.requestservice.getmyfriends(); // this will get our friends
+    this.events.subscribe('gotrequests', () => { // we print this request and thos will be showed in the array
+      this.myrequests = []; // in this array
       this.myrequests = this.requestservice.userdetails;
     })
     this.events.subscribe('friends', () => {
@@ -33,12 +36,14 @@ export class ChatsPage {
 
   ionViewDidLeave() {
     this.events.unsubscribe('gotrequests');
+    this.events.unsubscribe('friends');
   }
 
-  addbuddy() {
+  addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage
     this.navCtrl.push('BuddiesPage');
   }
 
+  // i think this item is the request we are sending inside the requestservices
   accept(item) {  //ep 7
     this.requestservice.acceptrequest(item).then(() => {
 

@@ -11,7 +11,9 @@ import { GroupsProvider } from '../../providers/groups/groups';
 export class GroupmembersPage {
   groupmembers;
   tempgrpmembers;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public groupservice: GroupsProvider,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public groupservice: GroupsProvider,
               public events: Events) {
   }
 
@@ -32,7 +34,7 @@ export class GroupmembersPage {
   searchuser(searchbar) {
     let tempmembers = this.tempgrpmembers;
 
-    var q = searchbar.target.value;
+    let q = searchbar.target.value;
 
     if (q.trim() === '') {
       this.groupmembers = this.tempgrpmembers;

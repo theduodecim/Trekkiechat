@@ -10,7 +10,7 @@ import firebase from 'firebase';
 */
 @Injectable()
 export class UserProvider {
-  firedata = firebase.database().ref('/users');
+  firedata = firebase.database().ref('/users'); //reference for the user data base
   constructor(public afireauth: AngularFireAuth) {
   }
 
@@ -101,10 +101,11 @@ export class UserProvider {
     return promise;
   }
 
-
+  //this is how to acces to particular key (node of users) to get thos values of the firebase database
   getuserdetails() {
     let promise = new Promise((resolve, reject) => { // let
-      this.firedata.child(firebase.auth().currentUser.uid).once('value', (snapshot) => {
+      this.firedata.child(firebase.auth().currentUser.uid) // reference for the user data base
+        .once('value', (snapshot) => {
         resolve(snapshot.val());
       }).catch((err) => {
         reject(err);
@@ -113,7 +114,7 @@ export class UserProvider {
     return promise;
   }
 
-  updatedisplayname(newname) {
+  updatedisplayname(newname) {  // updated the display name
     let promise = new Promise((resolve, reject) => { // let
       this.afireauth.auth.currentUser.updateProfile({
         displayName: newname,
@@ -136,6 +137,9 @@ export class UserProvider {
   }
 
 
+
+
+// this functions is to show all the users to choose one we are needed  https://firebase.google.com/docs/auth/web/manage-users
   getallusers() {
   let promise = new Promise((resolve, reject) => { //let
     this.firedata.orderByChild('uid').once('value', (snapshot) => {

@@ -99,11 +99,16 @@ export class RequestsProvider {
     })
     return promise;
   }
-  getmyfriends() {
-    let friendsuid = [];
+
+
+  // this will grab the acepted user of the backend to chat template
+
+  getmyfriends() { // geting this users for the backend and now
+    let friendsuid = []; // creating an array for this added users
     this.firefriends.child(firebase.auth().currentUser.uid).on('value', (snapshot) => {
       let allfriends = snapshot.val();
       this.myfriends = [];
+
       for (let i in allfriends) // let
         friendsuid.push(allfriends[i].uid);
 
@@ -117,10 +122,11 @@ export class RequestsProvider {
           }
         this.events.publish('friends');
       }).catch((err) => {
-        alert(err);
-      })
+          alert(err);
+        })
 
     })
+
+    }
   }
 
-}

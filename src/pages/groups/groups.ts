@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, LoadingController } from 'ionic-angular'; // events are temporary objects que crean un real efect
 import { GroupsProvider } from '../../providers/groups/groups';
+import * as firebase from "firebase";
 /**
  * Generated class for the GroupsPage page.
  *
@@ -14,9 +15,12 @@ import { GroupsProvider } from '../../providers/groups/groups';
 })
 export class GroupsPage {
   allmygroups;
+  firegroup = firebase.database().ref('/groups');
+  mygroups: Array<any> = []; // "the array"
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public events: Events,
+              public events: Events, // real effect
               public loadingCtrl: LoadingController,
               public groupservice: GroupsProvider) {
   }
@@ -26,22 +30,22 @@ export class GroupsPage {
       content: 'Getting your groups, Please wait...'
     });
     loader.present();
-    this.groupservice.getmygroups();
-    loader.dismiss();
-    this.events.subscribe('allmygroups', () => {
+    this.groupservice.getmygroups();                             // we present all the groups of the particular user
+    this.events.subscribe('allmygroups', () => { // subscribe this real time effect
+      loader.dismiss();
       this.allmygroups = this.groupservice.mygroups;
     })
-  }
+}
 
   ionViewDidLeave() {
-    this.events.unsubscribe('allmygroups');
+    this.events.unsubscribe('allmygroups'); // newgroup?
   }
 
   addgroup() {
-    this.navCtrl.push('NewgroupPage');
+    this.navCtrl.push('NewgroupPage')
   }
 
-  openchat(group) {
+  openchat(group) { // when the user tabs in the group
     alert('Groupchat ' + group.groupName);
     this.groupservice.getintogroup(group.groupName);
     this.navCtrl.push('GroupchatPage', { groupName: group.groupName });

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import firebase from 'firebase';
 
+
 /*
   Generated class for the GroupsProvider provider.
 
@@ -17,9 +18,10 @@ export class GroupsProvider {
   grouppic;
   groupmsgs;
 
-  constructor(public events: Events) {
+  constructor(public events: Events) {}
 
-  }
+
+
 
   addgroup(newGroup) {
     let promise = new Promise((resolve, reject) => { // let
@@ -52,15 +54,20 @@ export class GroupsProvider {
     })
 
   }
-  getintogroup(groupname) { // epsiode 12
+  getintogroup(groupname) {
+    // when the user tabs particular group we are getting
+    // into the group and getting the members group and store in the array currectgroup
     if (groupname != null) {
-      this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) => {
-        if (snapshot.val() != null) {
-          let temp = snapshot.val().members; // let
-          this.currentgroup = [];
-          for (let key in temp) { // let
-            this.currentgroup.push(temp[key]);
+      this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) => { // this saves the value in the group name
+        if (snapshot.val() != null) { // si el value tiene algun valor
+          let temp = snapshot.val().members; // subscribe this value to the members and store this in temp varible
+          this.currentgroup = []; // llamamos a este currentgroup que es type array
+          for (let key in temp) { // ahora creamos un loop con el
+            this.currentgroup.push(temp[key]); // valor de los miembros y lo soltamos dentro de currentgroup
           }
+            this.currentgroupname = groupname;
+            this.events.publish('gotintogroups');
+          // aca lo que hace es crear un real time efect para los usuarios
         }
       })
     }
@@ -78,20 +85,26 @@ export class GroupsProvider {
       }).catch((err) => {
         reject(err);
       })
-    })
+    });
     return promise;
   }
 
   getgroupimage() { // episode 13
     return new Promise((resolve, reject) => {
-      this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).once('value', (snapshot) => {
+      this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname)
+        .once('value', (snapshot) => {
         this.grouppic = snapshot.val().groupimage;
         resolve(true);
       })
     })
+
   }
-  addmember(newmember) {
-    this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('members').push(newmember).then(() => {
+
+
+
+  addmember(newmember) { // addign the member THE GOLD MEMBER
+    this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname)
+      .child('members').push(newmember).then(() => {
       this.getgroupimage().then(() => {
         this.firegroup.child(newmember.uid).child(this.currentgroupname).set({
           groupimage: this.grouppic,
@@ -100,9 +113,9 @@ export class GroupsProvider {
         }).catch((err) => {
           console.log(err);
         })
-      })
+      });
       this.getintogroup(this.currentgroupname);
-    })
+    });
   }
   deletemember(member) {
     this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname)
@@ -164,9 +177,31 @@ export class GroupsProvider {
       })
     })
   }
+
+   // espisode 16
+  postmsgs(member, msg, cb) {
+    this.firegroup.child(member.uid).child(this.currentgroupname).child('msgboard').push({
+      sentby: firebase.auth().currentUser.uid,
+      displayName: firebase.auth().currentUser.displayName,
+      photoURL: firebase.auth().currentUser.photoURL,
+      message: msg,
+      timestamp: firebase.database.ServerValue.TIMESTAMP
+    }).then(() => {
+      cb();
+    })
+  }
+ getgroupmsgs(groupname) {
+    this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).child('msgboard').on('value', (snapshot) => {
+      let tempmsgholder = snapshot.val(); // let
+      this.groupmsgs = [];
+      for (let key in tempmsgholder) // let
+      this.groupmsgs.push(tempmsgholder[key]);
+      this.events.publish('newgroupmsg');
+    })
+
+  }
   addgroupmsg(newmessage) {
     return new Promise((resolve) => {
-
       this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('owner').once('value', (snapshot) => {
         let tempowner = snapshot.val(); // let
         this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname).child('msgboard').push({
@@ -207,29 +242,6 @@ export class GroupsProvider {
       })
     })
   }
-   // espisode 16
-  postmsgs(member, msg, cb) {
-    this.firegroup.child(member.uid).child(this.currentgroupname).child('msgboard').push({
-      sentby: firebase.auth().currentUser.uid,
-      displayName: firebase.auth().currentUser.displayName,
-      photoURL: firebase.auth().currentUser.photoURL,
-      message: msg,
-      timestamp: firebase.database.ServerValue.TIMESTAMP
-    }).then(() => {
-      cb();
-    })
-  }
-  getgroupmsgs(groupname) {
-    this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).child('msgboard').on('value', (snapshot) => {
-      let tempmsgholder = snapshot.val(); // let
-      this.groupmsgs = [];
-      for (let key in tempmsgholder) // let
-      this.groupmsgs.push(tempmsgholder[key]);
-      this.events.publish('newgroupmsg');
-    })
-
-  }
-
 
 
 

@@ -9,8 +9,8 @@
   <ion-navbar color="hcolor">
     <ion-title>{{buddy.displayName}}</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="sendPicMsg()">
-        <ion-icon name="camera"></ion-icon>
+      <button ion-button (click)="sendPicMsg()"> <!--hey! you look that is like materials -->
+        <ion-icon name="camera"></ion-icon> <!-- the first section of adding the image we add the botton -->
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -25,8 +25,8 @@
           <img src="{{buddy.photoURL}}">
         </ion-avatar>
         <div class="bubble me" *ngIf="item.sentby === buddy.uid">
-          <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
-          <img src="{{item.message}}" *ngIf="imgornot[i]">
+          <h3 *ngIf="!imgornot[i]">{{item.message}}</h3> <!-- if imgornot if false send a normal menssage  And 4 here-->
+          <img src="{{item.message}}" *ngIf="imgornot[i]"><!-- if this is true will send the img -->
         </div>
         <ion-avatar item-right *ngIf="item.sentby != buddy.uid">
           <img src="{{photoURL}}">

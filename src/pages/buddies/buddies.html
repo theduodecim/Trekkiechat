@@ -6,24 +6,28 @@
 
 </ion-header>
 
-
+<!-- this will span the list of our friends -->
 <ion-content>
+  <!-- search bar if you want add a filter of items -->
   <ion-searchbar [(ngModel)]="searchstring" (input)="searchuser($event)" placeholder="Search"></ion-searchbar>
   <ion-list no-lines>
     <ion-list>
       <ion-item-sliding *ngFor="let key of filteredusers">
-        <ion-item >
+        <!-- with the item sliding we will loop storing in the variable key the filteredusers inside of our ts -->
+        <ion-item (click)="sendreq(key)" >
           <ion-avatar item-left>
             <img src="{{key.photoURL}}">
           </ion-avatar>
           <h2>{{key.displayName}}</h2>
         </ion-item>
-        <ion-item-options slide="left">
-          <button ion-button color="primary" (click)="sendreq(key)">
+          <button ion-button color="primary" (click)="sendreq(key)"><!--
+          this is to send that request and the other user will maybe accept or not -->
+          </button>
+
+          <!--<ion-item-options slide="left">
             <ion-icon name="person-add"></ion-icon>
             Add
-          </button>
-        </ion-item-options>
+        </ion-item-options>-->
 
       </ion-item-sliding>
     </ion-list>

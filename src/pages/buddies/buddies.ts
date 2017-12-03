@@ -19,12 +19,16 @@ export class BuddiesPage {
   newrequest = {} as connreq;
   temparr = [];
   filteredusers = [];  //check the episode
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public userservice: UserProvider, public alertCtrl: AlertController,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public userservice: UserProvider, // so if we are adding an friend the best approach is inject the userservices
+              public alertCtrl: AlertController,
               public requestservice: RequestsProvider) {
     this.userservice.getallusers().then((res: any) => {
       this.filteredusers = res;
       this.temparr = res;
+      // this create an temporaly array with the all users in the app,
+      // this will generate lag if the user grow?
     })
   }
 
@@ -32,15 +36,18 @@ export class BuddiesPage {
 
   }
 
-  searchuser(searchbar) {
+  // this is the function to search the users
+  // inside our backend ya que esta usamos
+  // filteredusers array this already has the value we need.
+  searchuser(searchbar) { //we create a function to take our search bar
     this.filteredusers = this.temparr;
-    var q = searchbar.target.value;
-    if (q.trim() == '') {
+    let q = searchbar.target.value; // let  // this seems to take the value of the searchbar
+    if (q.trim() == '') { // trim?
       return;
     }
 
-    this.filteredusers = this.filteredusers.filter((v) => {
-      if (v.displayName.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+    this.filteredusers = this.filteredusers.filter((v) => { // filter needs a value
+      if (v.displayName.toLowerCase().indexOf(q.toLowerCase()) > -1) { // check this if
         return true;
       }
       return false;

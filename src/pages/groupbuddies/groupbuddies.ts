@@ -18,8 +18,9 @@ export class GroupbuddiesPage {
               public navParams: NavParams,
               public requestservice: RequestsProvider,
               public events: Events,
-              public groupservice: GroupsProvider) {
-  }
+              public groupservice: GroupsProvider) {}
+
+
 
   ionViewWillEnter() {
     this.requestservice.getmyfriends();
@@ -32,8 +33,8 @@ export class GroupbuddiesPage {
       this.myfriends = [];
       this.myfriends = this.requestservice.myfriends;
       this.groupmembers = this.groupservice.currentgroup;
-      for (var key in this.groupmembers)
-        for (var friend in this.myfriends) {
+      for (let key in this.groupmembers) //let
+        for (let friend in this.myfriends) { // let
           if (this.groupmembers[key].uid === this.myfriends[friend].uid)
             this.myfriends.splice(this.myfriends.indexOf(this.myfriends[friend]), 1);
         }
@@ -44,22 +45,22 @@ export class GroupbuddiesPage {
   searchuser(searchbar) {
     let tempfriends = this.tempmyfriends;
 
-    var q = searchbar.target.value;
+    let q = searchbar.target.value; // let
 
     if (q.trim() === '') {
       this.myfriends = this.tempmyfriends;
       return;
     }
 
-    tempfriends = tempfriends.filter((v) => {
+    tempfriends = tempfriends.filter((v) => {  //concept of js mozilla baby
       if (v.displayName.toLowerCase().indexOf(q.toLowerCase()) > -1) {
         return true;
       }
-      return false;
+      else {
+        return false;
+      }
     })
-
     this.myfriends = tempfriends;
-
   }
 
   addbuddy(buddy) {

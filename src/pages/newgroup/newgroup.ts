@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { GroupsProvider } from '../../providers/groups/groups';
-import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
+import { ImghandlerProvider } from "../../providers/imghandler/imghandler";
 
 /**
  * Generated class for the NewgroupPage page.
@@ -19,16 +19,19 @@ export class NewgroupPage {
     groupName: 'GroupName',
     groupPic: 'https://firebasestorage.googleapis.com/v0/b/myapp-4eadd.appspot.com/o/chatterplace.png?alt=media&token=e51fa887-bfc6-48ff-87c6-e2c61976534e'
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-              public groupservice: GroupsProvider, public imghandler: ImghandlerProvider,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public alertCtrl: AlertController, // alert controller this create an alert with options
+              public groupservice: GroupsProvider,
+              public imghandler: ImghandlerProvider,
               public loadingCtrl: LoadingController) {
-  }
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewgroupPage');
   }
 
- /* chooseimage() {
+ chooseimage() {
     if (this.newgroup.groupName == 'GroupName') {
       let namealert = this.alertCtrl.create({
         buttons: ['okay'],
@@ -50,9 +53,9 @@ export class NewgroupPage {
       })
     }
 
-  }*/
+  }
 
-  creategroup() {
+  creategroup() { // we redirect the user back to the screen
     this.groupservice.addgroup(this.newgroup).then(() => {
       this.navCtrl.pop();
     }).catch((err) => {
@@ -60,7 +63,7 @@ export class NewgroupPage {
     })
   }
 
-  editgroupname() {
+  editgroupname() { // this is alert controller to create a new gruop name
     let alert = this.alertCtrl.create({
       title: 'Edit Group Name',
       inputs: [{

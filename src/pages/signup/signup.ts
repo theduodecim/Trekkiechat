@@ -17,7 +17,7 @@ export class SignupPage {
     email: '',
     password: '',
     displayName: ''
-  }
+  };
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public userservice: UserProvider,
@@ -31,13 +31,17 @@ export class SignupPage {
       position: 'bottom'
     });
     if (this.newuser.email == '' || this.newuser.password == '' || this.newuser.displayName == '') {
-      toaster.setMessage('All fields are required dude'); // check this
+      toaster.setMessage('All fields are required'); // check this
       toaster.present();
     }
     else if (this.newuser.password.length < 7) {
       toaster.setMessage('Password is not strong. Try giving more than six characters'); //check this
       toaster.present();
     }
+   /* else if (this.newuser.email = ('@Email')) {
+      toaster.setMessage('Invalid Email Field'); //check this
+      toaster.present();
+    }*/
     else {
       let loader = this.loadingCtrl.create({
         content: 'Please wait'
@@ -46,7 +50,7 @@ export class SignupPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          this.navCtrl.push('ChatsPage'); // check this!
+          this.navCtrl.push('ProfilePage'); // check this!
         else {
           let loader = this.loadingCtrl.create({
             content: 'Se cago todo'

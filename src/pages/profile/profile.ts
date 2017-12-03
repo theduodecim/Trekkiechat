@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
+import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
 /**
@@ -15,30 +15,32 @@ import firebase from 'firebase';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  avatar: string;
+  avatar: string;  //
   displayName: string;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public userservice: UserProvider,
-              public zone: NgZone,
-              public alertCtrl: AlertController
-              /*public imghandler: ImghandlerProvider*/) {
+              public zone: NgZone, // import zone to see the real effect
+              public alertCtrl: AlertController, // here we imported an alert Controller
+              public imghandler: ImghandlerProvider) {
   }
 
   ionViewWillEnter() {
     this.loaduserdetails();
   }
 
+  //this is the function to load the new update the avatar and the name in the profile tab
   loaduserdetails() {
-    this.userservice.getuserdetails().then((res: any) => {
-      this.displayName = res.displayName;
-      this.zone.run(() => {
-        this.avatar = res.photoURL;
+    this.userservice.getuserdetails()
+      .then((res: any) => {
+      this.displayName = res.displayName; //
+      this.zone.run(() => { // zone is using to see the real efect when the avatar is uploaded and the name
+        this.avatar = res.photoURL; //
       })
     })
   }
 
- /* editimage() {
+  editimage() { //this is the alert to update the img
     let statusalert = this.alertCtrl.create({
       buttons: ['okay']
     });
@@ -58,13 +60,13 @@ export class ProfilePage {
         statusalert.present();
       })
     })
-  }*/
+  }
 
-  editname() {
+  editname() { // here we are creating an alert to change the nickname
     let statusalert = this.alertCtrl.create({
       buttons: ['okay']
     });
-    let alert = this.alertCtrl.create({
+    let alert = this.alertCtrl.create({   // this is a basic structure to create an alert
       title: 'Edit Nickname',
       inputs: [{
         name: 'nickname',
@@ -74,41 +76,37 @@ export class ProfilePage {
         text: 'Cancel',
         role: 'cancel',
         handler: data => {
-
         }
       },
         {
           text: 'Edit',
-          handler: data => {
+          handler: data => { // here we store the data of the nickname
             if (data.nickname) {
               this.userservice.updatedisplayname(data.nickname).then((res: any) => {
                 if (res.success) {
                   statusalert.setTitle('Updated');
                   statusalert.setSubTitle('Your nickname has been changed successfully!!');
                   statusalert.present();
-                  this.zone.run(() => {
-                    this.displayName = data.nickname;
+                  this.zone.run(() => { // here we update this change in real time efect with zone
+                    this.displayName = data.nickname; // we pass the data inside this nickname
                   })
                 }
-
                 else {
                   statusalert.setTitle('Failed');
                   statusalert.setSubTitle('Your nickname was not changed');
                   statusalert.present();
                 }
-
               })
             }
           }
-
         }]
     });
     alert.present();
   }
 
-  logout() {
+  logout() {  // to know the user is logout we need to tell to our backend
     firebase.auth().signOut().then(() => {
-      this.navCtrl.parent.parent.setRoot('LoginPage');
+      this.navCtrl.parent.parent.setRoot('LoginPage'); // this sent to the login page with the navcrl
     })
   }
 

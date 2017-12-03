@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController, LoadingCont
 import { GroupsProvider } from '../../providers/groups/groups';
 /*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
 import firebase from 'firebase';
+import {ImghandlerProvider} from "../../providers/imghandler/imghandler";
 
 /**
  * Generated class for the GroupchatPage page.
@@ -24,27 +25,27 @@ export class GroupchatPage {
   alignuid;
   photoURL;
   imgornot;
-
-
+  firegroup;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public groupservice: GroupsProvider,
               public actionSheet: ActionSheetController,
               public events: Events,
-              /*public imgstore: ImghandlerProvider,*/
+              public imgstore: ImghandlerProvider,
               public loadingCtrl: LoadingController) {
 
     this.alignuid = firebase.auth().currentUser.uid;
     this.photoURL = firebase.auth().currentUser.photoURL;
     this.groupName = this.navParams.get('groupName');
     this.groupservice.getownership(this.groupName).then((res) => {
+      // this will get the owner of a particular group and will display the action sheet
       if (res)
         this.owner = true;
     }).catch((err) => {
       alert(err);
     })
-    this.groupservice.getgroupmsgs(this.groupName);
+   /* this.groupservice.getgroupmsgs(this.groupName);*/
     this.events.subscribe('newgroupmsg', () => {
       this.allgroupmsgs = [];
       this.imgornot = [];
@@ -78,6 +79,20 @@ export class GroupchatPage {
     console.log('ionViewDidLoad GroupchatPage');
   }
 
+  getingtogroup(groupname) {
+    if(groupname != null) {
+      this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) =>
+      {
+      if(snapshot.val() != null) {
+        let temp = snapshot.val().members;
+       }
+      })
+    }
+  }
+
+
+
+
   /*sendpicmsg() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'
@@ -95,7 +110,7 @@ export class GroupchatPage {
     })
   }*/
 
-  presentOwnerSheet() {
+  presentOwnerSheet() { // this are the sheets we are talking the course
     let sheet = this.actionSheet.create({
       title: 'Group Actions',
       buttons: [
@@ -144,7 +159,7 @@ export class GroupchatPage {
     sheet.present();
   }
 
-  presentMemberSheet() {
+  presentMemberSheet() { // this is the member sheet
     let sheet = this.actionSheet.create({
       title: 'Group Actions',
       buttons: [

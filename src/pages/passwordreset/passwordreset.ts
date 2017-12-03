@@ -14,8 +14,10 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class PasswordresetPage {
   email: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public userservice: UserProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public userservice: UserProvider,
+              public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -31,9 +33,9 @@ export class PasswordresetPage {
         alert.setTitle('Email Sent');
         alert.setSubTitle('Please follow the instructions in the email to reset your password');
       }
-      else {
+    }).catch((err) => { // check this if somethings goes wrong with the password reset
         alert.setTitle('Failed');
-      }
+        alert.setSubTitle(err);
     })
   }
 

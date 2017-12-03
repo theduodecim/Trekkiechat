@@ -44,7 +44,7 @@ export class ChatProvider { //episode 8
     }
   }
 
-  getbuddymessages() {
+  getbuddymessages() { // this buddy messages is an array temp is taking the values and suscribe it
     let temp;
     this.firebuddychats.child(firebase.auth().currentUser.uid).child(this.buddy.uid).on('value', (snapshot) => {
       this.buddymessages = [];
