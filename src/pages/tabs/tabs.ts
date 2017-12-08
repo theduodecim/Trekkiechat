@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 /**
- * Generated class for the TabsPage page.
+ * Generated class for the TabsPage tabs.
  *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
  */
+
 @IonicPage()
 @Component({
   selector: 'page-tabs',
-  templateUrl: 'tabs.html',
+  templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1: string = "ChatsPage";
-  tab2: string = "GroupsPage";
-  tab3: string = "ProfilePage";
+  lightForceRoot = 'LightPage';
+  darkForceRoot = 'DarkPage';
+  theWookieRoot = 'WookiePage';
+  profileRoot = 'ProfilePage';
 
-  constructor() {
-  }
+
+  constructor(public navCtrl: NavController) {}
 
 }

@@ -29,6 +29,10 @@ export class ProfilePage {
     this.loaduserdetails();
   }
 
+
+  appStart() {
+    this.navCtrl.push('LightPage');
+  }
   //this is the function to load the new update the avatar and the name in the profile tab
   loaduserdetails() {
     this.userservice.getuserdetails()

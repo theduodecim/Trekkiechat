@@ -93,7 +93,7 @@ export class GroupchatPage {
 
 
 
-  /*sendpicmsg() {
+  sendpicmsg() {
     let loader = this.loadingCtrl.create({
       content: 'Please wait'
     });
@@ -108,7 +108,7 @@ export class GroupchatPage {
       alert(err);
       loader.dismiss();
     })
-  }*/
+  }
 
   presentOwnerSheet() { // this are the sheets we are talking the course
     let sheet = this.actionSheet.create({
@@ -194,7 +194,13 @@ export class GroupchatPage {
     sheet.present();
   }
 
-  addgroupmsg() {
+
+  // there are 3 locations one is the message board of particular user
+  // first he needs to add
+
+
+
+  addgroupmsg() { // this will add a message inside of the other user message board
     this.groupservice.addgroupmsg(this.newmessage).then(() => {
       this.scrollto();
       this.newmessage = '';

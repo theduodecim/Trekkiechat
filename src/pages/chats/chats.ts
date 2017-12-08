@@ -14,7 +14,8 @@ export class ChatsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public requestservice: RequestsProvider,
-              public events: Events, //Events is a publish-subscribe
+              public events: Events,
+              //Events is a publish-subscribe
               // style event system for sending and responding
               // to application-level events across your app.
               public alertCtrl: AlertController,

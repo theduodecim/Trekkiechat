@@ -50,6 +50,12 @@ export class SignupPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
+          //group = getgroup(id_grupo)
+          //group.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
+          //group1 = getgroup(id_grupo2)
+          //group1.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
+          //group2 = getgroup(id_grupo3)
+          //group2.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
           this.navCtrl.push('ProfilePage'); // check this!
         else {
           let loader = this.loadingCtrl.create({

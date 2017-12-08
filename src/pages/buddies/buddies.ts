@@ -54,7 +54,7 @@ export class BuddiesPage {
     })
   }
 
-  sendreq(recipient) {
+  sendreq(recipient) { // this sends the request to add people
     this.newrequest.sender = firebase.auth().currentUser.uid;
     this.newrequest.recipient = recipient.uid;
     if (this.newrequest.sender === this.newrequest.recipient)

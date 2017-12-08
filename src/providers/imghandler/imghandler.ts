@@ -15,8 +15,7 @@ export class ImghandlerProvider {
   nativepath: any;
   firestore = firebase.storage();
 
-  constructor(public filechooser: FileChooser) {
-  }
+  constructor(public filechooser: FileChooser) {}
 
 
   uploadimage() {
@@ -50,40 +49,40 @@ export class ImghandlerProvider {
   }
 
 
- /* uploadimage() {
-     let loader = this.loadingCtrl.create({
-       content: 'Please wait'
-     });
-     const options: CameraOptions = {
-       quality: 100,
-       destinationType: this.camera.DestinationType.DATA_URL,
-       encodingType: this.camera.EncodingType.JPEG,
-       mediaType: this.camera.MediaType.PICTURE,
-       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-     }
-     let promise = new Promise((resolve, reject) => {
-       this.camera.getPicture(options).then((imageData) => {
-         loader.present();
-         let imageStore = this.firestore.ref('/profileimages').child(firebase.auth().currentUser.uid);
-         imageStore.putString(imageData, 'base64').then((res) => {
-           this.firestore.ref('/profileimages').child(firebase.auth().currentUser.uid).getDownloadURL().then((url) => {
-             loader.dismiss()
-             resolve(url);
-           }).catch((err) => {
-             reject(err);
-           })
-         }).catch((err) => {
-           reject(err);
-         })
+/*uploadimage() {
+  let loader = this.loadingCtrl.create({
+    content: 'Please wait'
+  });
+  const options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+  }
+  let promise = new Promise((resolve, reject) => {
+    this.camera.getPicture(options).then((imageData) => {
+      loader.present();
+      let imageStore = this.firestore.ref('/profileimages').child(firebase.auth().currentUser.uid);
+      imageStore.putString(imageData, 'base64').then((res) => {
+        this.firestore.ref('/profileimages').child(firebase.auth().currentUser.uid).getDownloadURL().then((url) => {
+          loader.dismiss()
+          resolve(url);
+        }).catch((err) => {
+          reject(err);
+        })
+      }).catch((err) => {
+        reject(err);
+      })
 
-       }, (err) => {
-       }).catch((err) => {
-         reject(err);
-       });
-       loader.dismiss();
-     })
-     return promise;*/
-
+    }, (err) => {
+    }).catch((err) => {
+      reject(err);
+    });
+    loader.dismiss();
+  })
+  return promise;
+}*/
   grouppicstore(groupname) {
     let promise = new Promise((resolve, reject) => { // let
       this.filechooser.open().then((url) => {

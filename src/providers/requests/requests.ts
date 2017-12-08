@@ -113,14 +113,14 @@ export class RequestsProvider {
         friendsuid.push(allfriends[i].uid);
 
       this.userservice.getallusers().then((users) => {
-        this.myfriends = [];
+        this.myfriends = []; // * also we store in this array
         for (let j in friendsuid) // let
           for (let key in users) { // let
             if (friendsuid[j] === users[key].uid) {
               this.myfriends.push(users[key]);
             }
           }
-        this.events.publish('friends');
+        this.events.publish('friends'); // we are publishing all my friends *
       }).catch((err) => {
           alert(err);
         })
