@@ -21,7 +21,8 @@ import { GroupsProvider } from '../providers/groups/groups';
 
 @NgModule({
   declarations: [
-    MyApp,
+    MyApp
+
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { GroupsProvider } from '../providers/groups/groups';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    MyApp
   ],
   providers: [
     StatusBar,

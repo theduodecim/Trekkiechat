@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the LightPage page.
@@ -14,7 +15,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'light.html',
 })
 export class LightPage {
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {

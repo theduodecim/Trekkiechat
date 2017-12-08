@@ -31,7 +31,7 @@ export class LoginPage {
   signin() {
     this.authservice.login(this.credentials).then((res: any) => {
       if (!res.code)
-        this.navCtrl.setRoot('LightPage');
+        this.navCtrl.setRoot('TabsPage');
       else
         alert(res);
     })
