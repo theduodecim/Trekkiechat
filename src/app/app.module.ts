@@ -19,6 +19,11 @@ import { GroupsProvider } from '../providers/groups/groups';
 import {AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
 import {DataService} from "../providers/services/data.services";
 import {AuthService} from "../providers/services/auth.services";
+import {LightPage} from "../pages/light/light";
+import {PipesModule} from "../pipes/pipes.module";
+import {Ng2OrderModule} from "ng2-order-pipe";
+import {SignupPage} from "../pages/signup/signup";
+
 
 /*import * as firebase from "firebase/app";*/
 
@@ -26,17 +31,23 @@ import {AuthService} from "../providers/services/auth.services";
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    LightPage,
+    SignupPage
   ],
   imports: [
     AngularFireDatabaseModule,
     BrowserModule,
+    PipesModule,
+    Ng2OrderModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
     AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    LightPage,
+    SignupPage
   ],
   providers: [
     StatusBar,

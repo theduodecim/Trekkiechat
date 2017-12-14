@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LightPage } from './light';
+import {LightPage} from "./light";
+
+
 
 @NgModule({
   declarations: [
@@ -10,4 +12,4 @@ import { LightPage } from './light';
     IonicPageModule.forChild(LightPage),
   ],
 })
-export class LightPageModule {}
+export class LightRoomPageModule {}

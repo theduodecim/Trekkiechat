@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
-import {ChatProvider} from "../../providers/chat/chat";
-import * as firebase from "firebase/app";
 import {DataService} from "../../providers/services/data.services";
 import {AuthService} from "../../providers/services/auth.services";
 
@@ -21,17 +19,16 @@ import {AuthService} from "../../providers/services/auth.services";
 
 export class LightPage {
   item: any;
+  $key: any;
   messages$: FirebaseListObservable<any[]>;
   placeholderText: string = 'Enter a message';
-  constructor(public navCtrl: NavController,public chatservice: ChatProvider, public navParams: NavParams, public auth: AuthService, public data: DataService) {
-               this.item = navParams.get('item');
-               this.messages$ = data.getChatMessages(this.item.$key);
-               this.setPlaceholder(auth);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
+    this.item = navParams.get('item');
+    this.messages$ = data.getChatMessages(this.$key);
+    this.setPlaceholder(auth);
   }
 
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LightPage');
   }
 
   addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage

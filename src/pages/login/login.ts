@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController} from 'ionic-angular';
 /*
 import { usercreds } from '../../models/interfaces/usercreds';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import * as firebase from "firebase";*/
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LightPage} from "../light/light";
 import {SignupPage} from "../signup/signup";
 import {PasswordresetPage} from "../passwordreset/passwordreset";
 import {AuthService} from "../../providers/services/auth.services";
+import {LightPage} from "../light/light";
 
 /**
  * Generated class for the LoginPage page.
@@ -17,6 +17,7 @@ import {AuthService} from "../../providers/services/auth.services";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -28,9 +29,9 @@ export class LoginPage {
               public navParams: NavParams,
               public authservice: AuthProvider) {
   }*/
+
   form: FormGroup;
   loginError: string;
-
   constructor(
     private navCtrl: NavController,
     private auth: AuthService,

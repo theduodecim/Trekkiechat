@@ -16,7 +16,7 @@
     <ion-item *ngFor="let message of (messages$ | async)">
       <h2>{{message.from}}</h2>
       <p>{{message.text}}</p>
-      <ion-note item-end>{{message.createdAt }}</ion-note>
+      <ion-note item-end>{{message.createdAt}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
