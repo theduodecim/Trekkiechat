@@ -1,26 +1,22 @@
+<!--
 <ion-header>
-
-  <ion-navbar color="yellow">
-    <ion-title>Light Force</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addbuddy()"> <!-- the button to add the buddys --->
-        <ion-icon name="person-add"></ion-icon> <!-- cool icon! :P --->
-      </button>
-    </ion-buttons>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{item.title}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
   <ion-list text-wrap>
-    <ion-item *ngFor="let message of (messages$)">
+    <ion-item *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': true">
       <h2>{{message.from}}</h2>
       <p>{{message.text}}</p>
-      <ion-note item-end>{{message.createdAt }}</ion-note>
+      <ion-note item-end>{{message.createdAt | date : 'short'}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
-
 <ion-footer>
   <ion-toolbar>
     <ion-grid>
@@ -35,3 +31,4 @@
     </ion-grid>
   </ion-toolbar>
 </ion-footer>
+-->

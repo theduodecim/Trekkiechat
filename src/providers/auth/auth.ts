@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { usercreds } from '../../models/interfaces/usercreds';
-
+import * as firebase from 'firebase/app';
 /*
   Generated class for the AuthProvider provider.
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
@@ -9,9 +9,12 @@ import { usercreds } from '../../models/interfaces/usercreds';
 */
 @Injectable()
 export class AuthProvider {
+  private user: firebase.User;
 
   constructor(public afireauth: AngularFireAuth) {
-
+    afireauth.authState.subscribe(user => {
+      this.user = user;
+    });
   }
 
   /*
@@ -29,5 +32,25 @@ export class AuthProvider {
     })
     return promise;
   }
+
+
+  getName() {
+    return this.user && (this.user.displayName || this.getUsername());
+  }
+
+  get authenticated(): boolean {
+    return this.user !== null;
+  }
+
+  getUsername() {
+    let email = this.getEmail() || '';
+    let indexOfAt = email.indexOf('@');
+    return indexOfAt > 0 ? email.substring(0, indexOfAt) : 'Anonymous';
+  }
+
+  getEmail() {
+    return this.user && this.user.email;
+  }
+
 
 }

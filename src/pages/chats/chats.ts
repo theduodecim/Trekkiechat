@@ -9,8 +9,10 @@ import {ChatProvider} from "../../providers/chat/chat";
   templateUrl: 'chats.html',
 })
 export class ChatsPage {
+
   myrequests;
   myfriends;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public requestservice: RequestsProvider,
@@ -19,8 +21,7 @@ export class ChatsPage {
               // style event system for sending and responding
               // to application-level events across your app.
               public alertCtrl: AlertController,
-              public chatservice: ChatProvider) {
-  }
+              public chatservice: ChatProvider) {}
 
   ionViewWillEnter() { // call when we enter to this page
     this.requestservice.getmyrequests(); // this will get our request
