@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {AuthProvider} from "../../providers/auth/auth";
+import {FirebaseListObservable} from "angularfire2/database";
+import {ChatProvider} from "../../providers/chat/chat";
+import * as firebase from "firebase/app";
 import {DataService} from "../../providers/services/data.services";
-import {AngularFireList} from "angularfire2/database";
-import {FirebaseListObservable} from "angularfire2/database-deprecated";
+import {AuthService} from "../../providers/services/auth.services";
 
 /**
  * Generated class for the LightPage page.
@@ -20,14 +21,14 @@ import {FirebaseListObservable} from "angularfire2/database-deprecated";
 
 export class LightPage {
   item: any;
-  messages$: AngularFireList<any[]>;
+  messages$: FirebaseListObservable<any[]>;
   placeholderText: string = 'Enter a message';
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public data: DataService) {
+  constructor(public navCtrl: NavController,public chatservice: ChatProvider, public navParams: NavParams, public auth: AuthService, public data: DataService) {
                this.item = navParams.get('item');
                this.messages$ = data.getChatMessages(this.item.$key);
                this.setPlaceholder(auth);
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LightPage');
@@ -50,6 +51,6 @@ export class LightPage {
       this.placeholderText = 'Please, login to post a message';
     }
   }
-
+  /*/{uid}*/
 
 }

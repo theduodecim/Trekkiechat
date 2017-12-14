@@ -44,14 +44,10 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
   }
 
-  signOut(): Promise<void> {
+  signOut(): firebase.Promise<void> {
     return this.afAuth.auth.signOut();
   }
 
-  signInWithGitHub(): Promise<any> {
-    console.log('Sign in with git hub');
-    return this.oauthSignIn(new firebase.auth.GithubAuthProvider());
-  }
 
   signInWithFacebook() {
     console.log('Sign in with facebook');

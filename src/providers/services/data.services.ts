@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Injectable()
 export class DataService {
   constructor(private db: AngularFireDatabase) {
   }
 
-   getActivityFeed(): AngularFireList<any[]> {
-     return this.db.list<any>('ftactivityfeed');
-   }
+  getActivityFeed(): FirebaseListObservable<any[]> {
+    return this.db.list('ftactivityfeed');
+  }
 
-   getNewsList(): AngularFireList<any[]> {
-     return this.db.list<any>('ftnews');
-   }
+  getNewsList(): FirebaseListObservable<any[]> {
+    return this.db.list('ftnews');
+  }
 
   getCatalogItems() {
     return this.db.list('ftcatalogitems');
@@ -43,6 +43,7 @@ export class DataService {
   }
 
   getChatMessages(chatId: string) {
-    return this.db.list<any>(`ftchatrooms/${chatId}/messages`);
+    return this.db.list(`ftchatrooms/${chatId}/messages`);
   }
+
 }

@@ -7,7 +7,7 @@ import { MyApp } from './app.component';
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireModule} from "angularfire2";
 import {config} from "./app.firebaseconfig";
-import { AuthProvider } from '../providers/auth/auth';
+/*import { AuthProvider } from '../providers/auth/auth';*/
 import { UserProvider } from '../providers/user/user';
 import { ImghandlerProvider } from '../providers/imghandler/imghandler';
 import { File } from '@ionic-native/file';
@@ -16,9 +16,11 @@ import { FilePath } from '@ionic-native/file-path';
 import { RequestsProvider } from '../providers/requests/requests';
 import { ChatProvider } from '../providers/chat/chat';
 import { GroupsProvider } from '../providers/groups/groups';
-import {AuthService} from "../providers/services/auth.services";
+import {AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
 import {DataService} from "../providers/services/data.services";
-import {AngularFireDatabaseModule} from "angularfire2/database";
+import {AuthService} from "../providers/services/auth.services";
+
+/*import * as firebase from "firebase/app";*/
 
 
 
@@ -37,7 +39,6 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
     MyApp
   ],
   providers: [
-    DataService,
     StatusBar,
     FilePath,
     FileChooser,
@@ -45,15 +46,15 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
     SplashScreen,
     {provide: ErrorHandler,
      useClass: IonicErrorHandler,},
-     AngularFireAuth,
-    AuthProvider,
+    AngularFireAuth,
     UserProvider,
     ImghandlerProvider,
     RequestsProvider,
     ChatProvider,
     GroupsProvider,
+    DataService,
     AuthService,
-    DataService
+    AngularFireDatabase
   ]
 })
 export class AppModule {}
