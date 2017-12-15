@@ -10,6 +10,7 @@ import {SignupPage} from "../signup/signup";
 import {PasswordresetPage} from "../passwordreset/passwordreset";
 import {AuthService} from "../../providers/services/auth.services";
 import {LightPage} from "../light/light";
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the LoginPage page.
@@ -56,7 +57,7 @@ export class LoginPage {
     };
     this.auth.signInWithEmail(credentials)
       .then(
-        () => this.navCtrl.setRoot(LightPage),
+        () => this.navCtrl.setRoot(TabsPage),
         error => this.loginError = error.message
       );
   }

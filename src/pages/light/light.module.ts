@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import {IonicModule, IonicPageModule} from 'ionic-angular';
 import {LightPage} from "./light";
+import {PipesModule} from "../../pipes/pipes.module";
+import {Ng2OrderModule} from "ng2-order-pipe";
+
 
 
 
@@ -10,6 +13,11 @@ import {LightPage} from "./light";
   ],
   imports: [
     IonicPageModule.forChild(LightPage),
+    [IonicModule, PipesModule, Ng2OrderModule]
+  ],
+  exports: [
+    LightPage,
   ],
 })
-export class LightRoomPageModule {}
+export class LightPageModule {}
+

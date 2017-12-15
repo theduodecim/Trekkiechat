@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
 import {DataService} from "../../providers/services/data.services";
 import {AuthService} from "../../providers/services/auth.services";
@@ -10,7 +10,6 @@ import {AuthService} from "../../providers/services/auth.services";
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
   selector: 'page-light',
@@ -22,13 +21,13 @@ export class LightPage {
   $key: any;
   messages$: FirebaseListObservable<any[]>;
   placeholderText: string = 'Enter a message';
+  @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
     this.item = navParams.get('item');
     this.messages$ = data.getChatMessages(this.$key);
-    this.setPlaceholder(auth);
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
   }
 
   addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage
@@ -39,8 +38,10 @@ export class LightPage {
     this.messages$.push({
       createdAt: new Date().getTime(),
       from: this.auth.getName(),
-      text: message
-    });
+      text: message,
+    }).then(()=>
+      this.content.scrollToBottom(300)
+    );
   }
 
   setPlaceholder(auth) {
@@ -48,6 +49,8 @@ export class LightPage {
       this.placeholderText = 'Please, login to post a message';
     }
   }
-  /*/{uid}*/
 
+
+
+  /*/{uid}*/
 }

@@ -43,7 +43,7 @@ export class DataService {
   }
 
   getChatMessages(chatId: string) {
-    return this.db.list(`ftchatrooms/${chatId}/messages`);
+    return this.db.list(`ftchatrooms/${chatId}/messages`)
   }
 
 }

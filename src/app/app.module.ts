@@ -19,10 +19,12 @@ import { GroupsProvider } from '../providers/groups/groups';
 import {AngularFireDatabase, AngularFireDatabaseModule} from "angularfire2/database";
 import {DataService} from "../providers/services/data.services";
 import {AuthService} from "../providers/services/auth.services";
-import {LightPage} from "../pages/light/light";
 import {PipesModule} from "../pipes/pipes.module";
 import {Ng2OrderModule} from "ng2-order-pipe";
 import {SignupPage} from "../pages/signup/signup";
+import {TabsPage} from "../pages/tabs/tabs";
+import {LightPageModule} from "../pages/light/light.module";
+import {NgPipesModule} from "ngx-pipes";
 
 
 /*import * as firebase from "firebase/app";*/
@@ -32,13 +34,15 @@ import {SignupPage} from "../pages/signup/signup";
 @NgModule({
   declarations: [
     MyApp,
-    LightPage,
-    SignupPage
+    SignupPage,
+    TabsPage
   ],
   imports: [
     AngularFireDatabaseModule,
     BrowserModule,
     PipesModule,
+    NgPipesModule,
+    LightPageModule,
     Ng2OrderModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
     AngularFireModule.initializeApp(config)
@@ -46,8 +50,8 @@ import {SignupPage} from "../pages/signup/signup";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LightPage,
-    SignupPage
+    SignupPage,
+    TabsPage
   ],
   providers: [
     StatusBar,
@@ -65,7 +69,7 @@ import {SignupPage} from "../pages/signup/signup";
     GroupsProvider,
     DataService,
     AuthService,
-    AngularFireDatabase
+    AngularFireDatabase,
   ]
 })
 export class AppModule {}
