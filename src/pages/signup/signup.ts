@@ -59,7 +59,7 @@ export class SignupPage {
           this.navCtrl.push('ProfilePage'); // check this!
         else {
           let loader = this.loadingCtrl.create({
-            content: 'Se cago todo'
+            content: '???'
           });
           loader.present();
           alert('Error' + res);

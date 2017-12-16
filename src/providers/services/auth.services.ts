@@ -16,6 +16,9 @@ export class AuthService {
   getName() {
     return this.user && (this.user.displayName || this.getUsername());
   }
+  getUidPic(){
+    return this.user && (this.user.photoURL);
+  }
 
   getUsername() {
     let email = this.getEmail() || '';

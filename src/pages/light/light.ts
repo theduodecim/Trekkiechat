@@ -38,6 +38,7 @@ export class LightPage {
     this.messages$.push({
       createdAt: new Date().getTime(),
       from: this.auth.getName(),
+      picprofile: this.auth.getUidPic(),
       text: message,
     }).then(()=>
       this.content.scrollToBottom(300)
@@ -50,7 +51,9 @@ export class LightPage {
     }
   }
 
-
+  profileEdit() {
+    this.navCtrl.push('ProfilePage');
+  }
 
   /*/{uid}*/
 }

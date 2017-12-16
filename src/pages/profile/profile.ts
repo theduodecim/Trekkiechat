@@ -31,7 +31,7 @@ export class ProfilePage {
 
 
   appStart() {
-    this.navCtrl.push('LightPage');
+    this.navCtrl.push('TabsPage');
   }
   //this is the function to load the new update the avatar and the name in the profile tab
   loaduserdetails() {

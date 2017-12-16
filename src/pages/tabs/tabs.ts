@@ -18,7 +18,7 @@ export class TabsPage {
   lightForceRoot = 'LightPage';
   darkForceRoot = 'DarkPage';
   theWookieRoot = 'WookiePage';
-  profileRoot = 'ProfilePage';
+
 
   constructor(public navCtrl: NavController) {}
 

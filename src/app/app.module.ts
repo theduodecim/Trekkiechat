@@ -27,6 +27,7 @@ import {LightPageModule} from "../pages/light/light.module";
 import {NgPipesModule} from "ngx-pipes";
 
 
+
 /*import * as firebase from "firebase/app";*/
 
 
@@ -35,7 +36,7 @@ import {NgPipesModule} from "ngx-pipes";
   declarations: [
     MyApp,
     SignupPage,
-    TabsPage
+    TabsPage,
   ],
   imports: [
     AngularFireDatabaseModule,
@@ -51,7 +52,7 @@ import {NgPipesModule} from "ngx-pipes";
   entryComponents: [
     MyApp,
     SignupPage,
-    TabsPage
+    TabsPage,
   ],
   providers: [
     StatusBar,
