@@ -16,7 +16,7 @@ export class SignupPage {
   newuser = {
     email: '',
     password: '',
-    displayName: ''
+    displayName: '',
   };
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -38,7 +38,7 @@ export class SignupPage {
       toaster.setMessage('Password is not strong. Try giving more than six characters'); //check this
       toaster.present();
     }
-   /* else if (this.newuser.email = ('@Email')) {
+   /* else if (this.newuser.email = email) {
       toaster.setMessage('Invalid Email Field'); //check this
       toaster.present();
     }*/
@@ -72,4 +72,10 @@ export class SignupPage {
     this.navCtrl.setRoot('LoginPage');
   }
 
+  validateEmail(email) {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+  }
+
 }
+
