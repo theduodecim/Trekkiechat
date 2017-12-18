@@ -32,10 +32,12 @@ export class PasswordresetPage {
       if (res.success) {
         alert.setTitle('Email Sent');
         alert.setSubTitle('Please follow the instructions in the email to reset your password');
+        alert.present();
       }
     }).catch((err) => { // check this if somethings goes wrong with the password reset
         alert.setTitle('Failed');
         alert.setSubTitle(err);
+        alert.present();
     })
   }
 

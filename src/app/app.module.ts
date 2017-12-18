@@ -25,6 +25,7 @@ import {SignupPage} from "../pages/signup/signup";
 import {TabsPage} from "../pages/tabs/tabs";
 import {LightPageModule} from "../pages/light/light.module";
 import {NgPipesModule} from "ngx-pipes";
+import {PasswordresetPage} from "../pages/passwordreset/passwordreset";
 
 
 
@@ -37,6 +38,7 @@ import {NgPipesModule} from "ngx-pipes";
     MyApp,
     SignupPage,
     TabsPage,
+    PasswordresetPage
   ],
   imports: [
     AngularFireDatabaseModule,
@@ -53,6 +55,7 @@ import {NgPipesModule} from "ngx-pipes";
     MyApp,
     SignupPage,
     TabsPage,
+    PasswordresetPage
   ],
   providers: [
     StatusBar,
