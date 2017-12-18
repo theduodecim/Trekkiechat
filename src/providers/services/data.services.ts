@@ -46,4 +46,12 @@ export class DataService {
     return this.db.list(`ftchatrooms/${chatId}/messages`)
   }
 
+  getChatMessagesD(chatId: string) {
+    return this.db.list(`ftchatroomsD/${chatId}/messagesD`)
+  }
+
+  getChatMessagesW(chatId: string) {
+    return this.db.list(`ftchatroomsW/${chatId}/messagesW`)
+  }
+
 }

@@ -1,10 +1,15 @@
 <ion-header>
 
-  <ion-navbar color="black">
+  <ion-navbar color="Black">
     <ion-title>Dark Force</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addbuddy()"> <!-- the button to add the buddys --->
         <ion-icon name="person-add"></ion-icon> <!-- cool icon! :P --->
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="profileEdit()"> <!-- the button to add the buddys --->
+        <ion-icon name="md-planet"></ion-icon> <!-- cool icon! :P --->
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -13,13 +18,13 @@
 
 <ion-content #content>
   <ion-list text-wrap>
-    <ion-item *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': reverse : true">
+    <ion-item *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': true">
       <ion-avatar item-left>
         <img src="{{message.picprofile}}">
       </ion-avatar>
       <h2>{{message.from}}</h2>
       <p>{{message.text}}</p>
-      <ion-note item-end>{{message.createdAt}}</ion-note>
+      <ion-note item-end>{{message.createdAt | date : 'short'}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>

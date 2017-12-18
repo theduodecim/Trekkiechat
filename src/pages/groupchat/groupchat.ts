@@ -79,7 +79,7 @@ export class GroupchatPage {
     console.log('ionViewDidLoad GroupchatPage');
   }
 
-  getingtogroup(groupname) {
+  /*getingtogroup(groupname) {
     if(groupname != null) {
       this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) =>
       {
@@ -88,7 +88,7 @@ export class GroupchatPage {
        }
       })
     }
-  }
+  }*/
 
 
 

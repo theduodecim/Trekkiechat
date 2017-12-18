@@ -16,7 +16,7 @@ import {AuthService} from "../../providers/services/auth.services";
   templateUrl: 'light.html',
 })
 
-export class LightPage {
+export class LightPage{
   item: any;
   $key: any;
   messages$: FirebaseListObservable<any[]>;
@@ -27,8 +27,6 @@ export class LightPage {
     this.messages$ = data.getChatMessages(this.$key);
   }
 
-  ionViewWillEnter() {
-  }
 
   addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage
     this.navCtrl.push('ChatsPage');
@@ -41,7 +39,7 @@ export class LightPage {
       picprofile: this.auth.getUidPic(),
       text: message,
     }).then(()=>
-      this.content.scrollToBottom(300)
+      this.content.scrollToTop(300)
     );
   }
 

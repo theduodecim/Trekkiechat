@@ -24,25 +24,21 @@ export class DarkPage {
   @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
     this.item = navParams.get('item');
-    this.messages$ = data.getChatMessages(this.$key);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DarkPage');
+    this.messages$ = data.getChatMessagesD(this.$key);
   }
 
   addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage
     this.navCtrl.push('ChatsPage');
   }
 
-  send(message: string) {
+  send(messageD: string) {
     this.messages$.push({
       createdAt: new Date().getTime(),
       from: this.auth.getName(),
       picprofile: this.auth.getUidPic(),
-      text: message,
+      text: messageD,
     }).then(()=>
-      this.content.scrollToBottom(300)
+      this.content.scrollToTop(300)
     );
   }
 

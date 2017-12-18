@@ -1,4 +1,10 @@
 page-light {
+  .content {
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size:     cover;
+    background-image: url('');
+  }
   ion-note {
     font-size: 12px;
     position: fixed;

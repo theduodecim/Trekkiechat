@@ -20,6 +20,6 @@ export class TabsPage {
   theWookieRoot = 'WookiePage';
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,) {}
 
 }
