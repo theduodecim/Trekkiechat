@@ -21,7 +21,7 @@
 <ion-content padding>
   <ion-list no-lines>
     <ion-list-header>
-      Requests
+      Requests Slide to Left to show the options
     </ion-list-header>
     <ion-item-sliding *ngFor="let item of myrequests">
       <ion-item>
@@ -37,7 +37,7 @@
         </button>
         <button ion-button color="danger" (click)="ignore(item)">
           <ion-icon name="trash"></ion-icon>
-          NOPE
+          NO
         </button>
       </ion-item-options>
     </ion-item-sliding>
