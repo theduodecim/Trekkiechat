@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, LoadingController, ToastController, Content} from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 /**
  * Generated class for the SignupPage page.
@@ -13,6 +13,7 @@ import { UserProvider } from '../../providers/user/user';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
+  @ViewChild(Content) content: Content
   newuser = {
     email: '',
     password: '',
@@ -25,6 +26,13 @@ export class SignupPage {
               public toastCtrl: ToastController) {
   }
 
+  ionViewWillEnter() {
+    {
+      setTimeout(() => {
+        this.content.scrollToTop();
+      }, 1000);
+    }
+  }
   signup() {
     let toaster = this.toastCtrl.create({
       duration: 3000,

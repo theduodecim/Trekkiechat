@@ -2,7 +2,7 @@
 <widget id="io.ionic.starter" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TrekkieChat</name>
     <description>TrekkieChat the free way to have fun with StarWars Fans Powered byIonic/Cordova app.</description>
-    <author email="trekkiechatapp@gmail.com" href="">TrekkieChatApp Team</author>
+    <author email="trekkiechatapp@gmail.com" href="">TrekkiionieChatApp Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

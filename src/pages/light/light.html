@@ -1,7 +1,15 @@
 <ion-header>
 
-  <ion-navbar color="yellow">
-    <ion-title>Light Force</ion-title>
+  <ion-navbar color="green">
+    <ion-title style=" color: #fff;
+  text-shadow: 0 0 5px #fff,
+  0 0 10px #fff,
+  0 0 20px #fff,
+  0 0 40px #fff300,
+  0 0 80px #fff300,
+  0 0 90px #fff300,
+  0 0 100px #fff300,
+  0 0 150px #fff300;">Light Force</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="addbuddy()"> <!-- the button to add the buddys --->
         <ion-icon name="person-add"></ion-icon> <!-- cool icon! :P --->
@@ -24,7 +32,7 @@
       </ion-avatar>
       <h2>{{message.from}}</h2>
       <p>{{message.text}}</p>
-     <ion-note item-end>{{message.createdAt | date : 'short'}}</ion-note>
+      <ion-note item-end>{{message.createdAt | date : 'short'}}</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
