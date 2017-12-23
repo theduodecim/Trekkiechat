@@ -13,12 +13,13 @@ import { UserProvider } from '../../providers/user/user';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  @ViewChild(Content) content: Content
+  @ViewChild(Content) content: Content;
   newuser = {
     email: '',
     password: '',
     displayName: '',
   };
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public userservice: UserProvider,

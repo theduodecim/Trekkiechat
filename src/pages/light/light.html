@@ -21,18 +21,20 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-<ion-content #content>
-  <ion-list text-wrap>
-    <ion-item *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': true">
-      <ion-avatar item-left>
-        <img src="{{message.picprofile}}">
-      </ion-avatar>
+<ion-content #content style="background-color: black">
+  <ion-list text-wrap no-lines>
+    <ion-item id="msg" style="background-color: black" *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': true">
+      <ion-item class="bubble" [ngClass]="{'text-right': auth.user.uid !== message.uid}">
+        <!-- ng class works easy call a class from css and we can apply conditions to this class -->
+        <ion-avatar id="avatar" item-left >
+          <img src="{{message.picprofile}}">
+        </ion-avatar>
       <h2>{{message.from}}</h2>
       <p>{{message.text}}</p>
-      <ion-note item-end>{{message.createdAt | date : 'short'}}</ion-note>
+     <ion-note item-end>{{message.createdAt | date : 'short'}}</ion-note>
+      </ion-item>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -38,6 +38,7 @@ export class LightPage{
       from: this.auth.getName(),
       picprofile: this.auth.getUidPic(),
       text: message,
+      uid: this.auth.getUserId()
     }).then(()=>
       this.content.scrollToTop(300)
     );

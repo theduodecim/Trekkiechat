@@ -20,7 +20,7 @@
 <ion-content #content>
   <div class = "chatwindow">
     <ion-list no-lines>
-      <ion-item *ngFor = "let item of allmessages; let i = index" text-wrap>
+      <ion-item  *ngFor = "let item of allmessages; let i = index" text-wrap>
         <ion-avatar item-left *ngIf="item.sentby === buddy.uid">
           <img src="{{buddy.photoURL}}">
         </ion-avatar>
@@ -28,7 +28,7 @@
           <h3 *ngIf="!imgornot[i]">{{item.message}}</h3> <!-- if imgornot if false send a normal menssage  And 4 here-->
           <img src="{{item.message}}" *ngIf="imgornot[i]"><!-- if this is true will send the img -->
         </div>
-        <ion-avatar item-right *ngIf="item.sentby != buddy.uid">
+        <ion-avatar item-right *ngIf="item.sentby != buddy.uid"> <!-- this is an approach to resive messages diferent from the light,dark or wookie chat -->
           <img src="{{photoURL}}">
         </ion-avatar>
         <div class="bubble you" *ngIf="item.sentby != buddy.uid">

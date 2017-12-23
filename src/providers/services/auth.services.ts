@@ -6,13 +6,16 @@ import AuthProvider = firebase.auth.AuthProvider;
 @Injectable()
 export class AuthService {
   private user: firebase.User;
-
+  uid = this.getUserId();
   constructor(public afAuth: AngularFireAuth) {
     afAuth.authState.subscribe(user => {
       this.user = user;
     });
   }
 
+  getUserId() {
+    return this.user && this.user.uid || this.getUsername();
+  }
   getName() {
     return this.user && (this.user.displayName || this.getUsername());
   }
