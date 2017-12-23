@@ -23,4 +23,17 @@ page-dark {
     padding-left: 10px;
     border-radius: 5px;
   }
+  .bubble {
+    border-radius: 15px; // change the picks of the figure
+    box-shadow: 0 0 25px #ff0008;
+    padding: 10px 18px;
+    margin: 5px 45px 5px 20px;
+  }
+
+  .text-right {
+    box-shadow: 0 0 25px #000000;
+    right: auto;
+    margin: 5px 45px 5px 20px;
+    left: -9px;
+  }
 }
