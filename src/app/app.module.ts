@@ -26,6 +26,8 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {LightPageModule} from "../pages/light/light.module";
 import {NgPipesModule} from "ngx-pipes";
 import {PasswordresetPage} from "../pages/passwordreset/passwordreset";
+import {GooglePlus} from "@ionic-native/google-plus";
+/*import {GoogleService} from "../providers/services/googleservice";*/
 
 
 
@@ -74,6 +76,8 @@ import {PasswordresetPage} from "../pages/passwordreset/passwordreset";
     DataService,
     AuthService,
     AngularFireDatabase,
+    GooglePlus
+    /*GoogleService*/
   ]
 })
 export class AppModule {}

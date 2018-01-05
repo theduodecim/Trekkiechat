@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
+
+
+
 
 @Injectable()
 export class AuthService {
   private user: firebase.User;
   uid = this.getUserId();
+  userProfile: any = null;
+  token: string;
   constructor(public afAuth: AngularFireAuth) {
     afAuth.authState.subscribe(user => {
       this.user = user;
@@ -60,11 +65,6 @@ export class AuthService {
     return this.oauthSignIn(new firebase.auth.FacebookAuthProvider());
   }
 
-  signInWithGoogle() {
-    console.log('Sign in with google');
-    return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
-  }
-
   signInWithTwitter() {
     console.log('Sign in with twitter');
     return this.oauthSignIn(new firebase.auth.TwitterAuthProvider());
@@ -73,6 +73,7 @@ export class AuthService {
   resetPassword(email: string) {
     return this.afAuth.auth.sendPasswordResetEmail(email);
   }
+
 
   private oauthSignIn(provider: AuthProvider) {
     if (!(<any>window).cordova) {

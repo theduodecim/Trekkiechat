@@ -1,29 +1,32 @@
 <ion-content class="background">
   <form (ngSubmit)="login()" [formGroup]="form">
-  <ion-card>
-    <ion-card-header>
-     Trekkie Chat App
-    </ion-card-header>
-  <ion-card-content>
-  <ion-list no-lines>
-    <div class="spacer" style="height: 10px;"></div>
-  <ion-item>
-    <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
-  </ion-item>
-    <div class="spacer" style="height: 5px;"></div>
-    <ion-item>
-      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-    </ion-item>
-    <button ion-button full type="submit" [disabled]="!form.valid">Log in</button>
-    <div class="spacer" style="height: 10px;"></div>
-    <a (click)="resetPassword()">Forgot login details ? <b> Get help </b></a>
-    <div class="spacer" style="height: 10px;"></div>
-    <p>OR</p>
-    <div class="spacer" style="height: 10px;"></div>
-    <button ion-button clear full color="light" (click)="signup()">Don't have an account? Sign up</button>
-  </ion-list>
-</ion-card-content>
-</ion-card>
+    <ion-card>
+      <ion-card-header>
+        Trekkie Chat App
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list no-lines>
+          <div class="spacer" style="height: 10px;"></div>
+          <ion-item>
+            <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+          </ion-item>
+          <div class="spacer" style="height: 5px;"></div>
+          <ion-item>
+            <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+          </ion-item>
+          <button ion-button full type="submit" [disabled]="!form.valid">Log in</button>
+          <div class="spacer" style="height: 10px;"></div>
+          <a (click)="resetPassword()">Forgot login details ? <b> Get help </b></a>
+          <div class="spacer" style="height: 10px;"></div>
+          <p>OR</p>
+          <div class="spacer" style="height: 10px;"></div>
+          <button ion-button clear full color="light" (click)="signup()">Don't have an account? Sign up</button>
+          <button ion-button clear full color="light" (click)="signInWithGoogle()">
+            <ion-icon name="logo-googleplus"></ion-icon>
+            Login with Google
+          </button>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
   </form>
 </ion-content>
-

@@ -11,7 +11,8 @@ import {PasswordresetPage} from "../passwordreset/passwordreset";
 import {AuthService} from "../../providers/services/auth.services";
 import {LightPage} from "../light/light";
 import {TabsPage} from "../tabs/tabs";
-
+import {GooglePlus} from "@ionic-native/google-plus";
+import * as firebase from "firebase/app";
 /**
  * Generated class for the LoginPage page.
  *
@@ -33,7 +34,9 @@ export class LoginPage {
 
   form: FormGroup;
   loginError: string;
+  fireauth = firebase.auth();
   constructor(
+    public googleplus: GooglePlus,
     private navCtrl: NavController,
     private auth: AuthService,
     fb: FormBuilder
@@ -72,13 +75,25 @@ export class LoginPage {
       );
   }
 
-  loginWithGoogle() {
-    this.auth.signInWithGoogle()
-      .then(
-        () => this.navCtrl.setRoot(LightPage),
-        error => console.log(error.message)
-      );
-  }
+
+
+  signInWithGoogle() {
+    this.googleplus.login({
+      'webClientId': '73724290118-et73usq9p6hi21emsrqpgqr64hoglimg.apps.googleusercontent.com',
+    }).then( (res) => {
+      const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
+      this.fireauth.signInWithCredential(firecreds).then((res) => {
+        alert('login Success');
+        this.navCtrl.setRoot(TabsPage);
+      }).catch((err) => {
+        alert('Auth Failed' + err)
+      })
+    }).catch((err) => {
+      alert('Error' + err);
+    })
+    }
+
+
 
   loginWithTwitter() {
     this.auth.signInWithTwitter()
