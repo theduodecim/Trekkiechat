@@ -9,8 +9,6 @@ page-login {
     align-content: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
   }
   ion-card.card {
     box-shadow: none;
@@ -28,7 +26,7 @@ page-login {
 
   .item {
     margin-bottom: 10px;
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.18);
     border: medium none;
 
     .text-input {

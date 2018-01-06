@@ -8,7 +8,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SignupPage} from "../signup/signup";
 import {PasswordresetPage} from "../passwordreset/passwordreset";
 import {AuthService} from "../../providers/services/auth.services";
-import {LightPage} from "../light/light";
 import {TabsPage} from "../tabs/tabs";
 import {GooglePlus} from "@ionic-native/google-plus";
 import * as firebase from "firebase/app";
@@ -73,14 +72,14 @@ export class LoginPage {
   }
 
 
-
+/*
   loginWithFacebook() {
     this.auth.signInWithFacebook()
       .then(
         () => this.navCtrl.setRoot(LightPage),
         error => console.log(error.message)
       );
-  }
+  }*/
 
 
 
@@ -99,14 +98,14 @@ export class LoginPage {
     })
     }
 
-
+/*
   loginWithTwitter() {
     this.auth.signInWithTwitter()
       .then(
         () => this.navCtrl.setRoot(LightPage),
         error => console.log(error.message)
       );
-  }
+  }*/
 
   signup() {
     this.navCtrl.push(SignupPage);
