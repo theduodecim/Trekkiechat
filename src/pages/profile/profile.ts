@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
 import { UserProvider } from '../../providers/user/user';
 import firebase from 'firebase';
+import {GooglePlus} from "@ionic-native/google-plus";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -22,7 +23,8 @@ export class ProfilePage {
               public userservice: UserProvider,
               public zone: NgZone, // import zone to see the real effect
               public alertCtrl: AlertController, // here we imported an alert Controller
-              public imghandler: ImghandlerProvider) {
+              public imghandler: ImghandlerProvider,
+              public googleplus: GooglePlus) {
   }
 
   ionViewWillEnter() {
@@ -30,9 +32,6 @@ export class ProfilePage {
   }
 
 
-  appStart() {
-    this.navCtrl.push('TabsPage');
-  }
   //this is the function to load the new update the avatar and the name in the profile tab
   loaduserdetails() {
     this.userservice.getuserdetails()
@@ -89,7 +88,7 @@ export class ProfilePage {
               this.userservice.updatedisplayname(data.nickname).then((res: any) => {
                 if (res.success) {
                   statusalert.setTitle('Updated');
-                  statusalert.setSubTitle('Your nickname has been changed successfully!!');
+                  statusalert.setSubTitle('Your nickname has been changed');
                   statusalert.present();
                   this.zone.run(() => { // here we update this change in real time efect with zone
                     this.displayName = data.nickname; // we pass the data inside this nickname
@@ -110,7 +109,8 @@ export class ProfilePage {
 
   logout() {  // to know the user is logout we need to tell to our backend
     firebase.auth().signOut().then(() => {
-      this.navCtrl.parent.parent.setRoot('LoginPage'); // this sent to the login page with the navcrl
+      this.navCtrl.parent.parent.setRoot('LoginPage');
+      this.googleplus.logout()// this sent to the login page with the navcrl
     })
   }
 

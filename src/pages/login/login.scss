@@ -28,7 +28,7 @@ page-login {
 
   .item {
     margin-bottom: 10px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.35);
     border: medium none;
 
     .text-input {
@@ -66,4 +66,8 @@ page-login {
     position: static;
   }
 
-}
+  ion-icon:hover{
+    color: #effdff;
+    }
+  }
+

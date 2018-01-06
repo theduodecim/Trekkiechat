@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController} from 'ionic-angular';
 /*
 import { usercreds } from '../../models/interfaces/usercreds';
-
 import { AuthProvider } from '../../providers/auth/auth';
 import * as firebase from "firebase";*/
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -31,19 +30,27 @@ export class LoginPage {
               public navParams: NavParams,
               public authservice: AuthProvider) {
   }*/
-
   form: FormGroup;
   loginError: string;
   fireauth = firebase.auth();
+  userProfile: any = null;
   constructor(
     public googleplus: GooglePlus,
     private navCtrl: NavController,
     private auth: AuthService,
     fb: FormBuilder
   ) {
+
     this.form = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+    });
+   firebase.auth().onAuthStateChanged( user => {
+      if (user){
+        this.userProfile = user;
+      } else {
+        this.userProfile = null;
+      }
     });
   }
 
@@ -82,8 +89,7 @@ export class LoginPage {
       'webClientId': '73724290118-et73usq9p6hi21emsrqpgqr64hoglimg.apps.googleusercontent.com',
     }).then( (res) => {
       const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
-      this.fireauth.signInWithCredential(firecreds).then((res) => {
-        alert('login Success');
+      this.fireauth.signInWithCredential(firecreds).then(() => {
         this.navCtrl.setRoot(TabsPage);
       }).catch((err) => {
         alert('Auth Failed' + err)
@@ -92,7 +98,6 @@ export class LoginPage {
       alert('Error' + err);
     })
     }
-
 
 
   loginWithTwitter() {
@@ -110,6 +115,7 @@ export class LoginPage {
   resetPassword() {
     this.navCtrl.push(PasswordresetPage);
   }
+
 
 
 

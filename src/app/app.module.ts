@@ -40,7 +40,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
     MyApp,
     SignupPage,
     TabsPage,
-    PasswordresetPage
+    PasswordresetPage,
   ],
   imports: [
     AngularFireDatabaseModule,
@@ -57,7 +57,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
     MyApp,
     SignupPage,
     TabsPage,
-    PasswordresetPage
+    PasswordresetPage,
   ],
   providers: [
     StatusBar,
