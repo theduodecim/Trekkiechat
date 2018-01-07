@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
-
+import * as admin from "firebase-admin";
 /*
   Generated class for the UserProvider provider.
 
@@ -155,5 +155,7 @@ export class UserProvider {
   })
   return promise;
 }
+
+
 
 }

@@ -37,6 +37,7 @@ export class WookiePage {
       from: this.auth.getName(),
       picprofile: this.auth.getUidPic(),
       text: messageW,
+      uid: this.auth.getUserId()
     }).then(()=>
       this.content.scrollToTop(300)
     );

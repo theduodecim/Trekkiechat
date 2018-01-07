@@ -12,6 +12,7 @@ import {Events} from "ionic-angular";
 */
 @Injectable()
 export class RequestsProvider {
+  deleteAllUser = firebase.database().ref('/requests');
   firereq = firebase.database().ref('/requests');
   userdetails;
   myfriends;

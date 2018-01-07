@@ -87,8 +87,12 @@ export class LoginPage {
     this.googleplus.login({
       'webClientId': '73724290118-et73usq9p6hi21emsrqpgqr64hoglimg.apps.googleusercontent.com',
     }).then( (res) => {
-      const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
-      this.fireauth.signInWithCredential(firecreds).then(() => {
+      const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken); // esta tomando esas credenciales para logearce
+
+// CHECK HERE
+
+
+      this.fireauth.signInWithCredential(firecreds).then(() => { // esta logeandoce
         this.navCtrl.setRoot(TabsPage);
       }).catch((err) => {
         alert('Auth Failed' + err)
@@ -114,12 +118,6 @@ export class LoginPage {
   resetPassword() {
     this.navCtrl.push(PasswordresetPage);
   }
-
-
-
-
-
-
 
 
 

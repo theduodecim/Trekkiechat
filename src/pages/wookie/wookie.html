@@ -25,6 +25,8 @@
 </ion-header>
 
 <ion-content #content style="background-color: black">
+  <ion-row>
+    <ion-col col-12 col-sm>
   <ion-list text-wrap no-lines>
     <ion-item id="msg" style="background-color: black" *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': true">
       <ion-item class="bubble" [ngClass]="{'text-right': auth.user.uid !== message.uid}">
@@ -38,6 +40,8 @@
       </ion-item>
     </ion-item>
   </ion-list>
+    </ion-col>
+      </ion-row>
 </ion-content>
 
 <ion-footer>

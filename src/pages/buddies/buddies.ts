@@ -39,7 +39,7 @@ export class BuddiesPage {
   // this is the function to search the users
   // inside our backend ya que esta usamos
   // filteredusers array this already has the value we need.
-  searchuser(searchbar) { //we create a function to take our search bar
+  searchuser(searchbar) { //we create a function to take our search bar in the template
     this.filteredusers = this.temparr;
     let q = searchbar.target.value; // let  // this seems to take the value of the searchbar
     if (q.trim() == '') { // trim?

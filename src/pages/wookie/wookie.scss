@@ -23,11 +23,7 @@ page-wookie {
 
   .bubble {
     border-radius: 15px; // change the picks of the figure
-    box-shadow: 0 0 25px #ff0008;
-    padding: 10px 18px;
-    margin: 5px 45px 5px 20px;
-    transition: color 0.25s;
-    animation: 1s animateBorder infinite;
+    box-shadow: 0 0 25px #a1410d;
 
     &::before,
     &::after {
@@ -79,11 +75,8 @@ page-wookie {
   }
 
   .text-right {
-    right: auto;
-    margin: 5px 45px 5px 20px;
-    left: -9px;
-    transition: color 0.25s;
-    animation: 1s animateBorder infinite;
+    border-radius: 15px; // change the picks of the figure
+    box-shadow: 0 0 25px #6a3406;
 
     &::before,
     &::after {

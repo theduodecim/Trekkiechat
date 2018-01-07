@@ -6,6 +6,7 @@ import AuthProvider = firebase.auth.AuthProvider;
 
 
 
+
 @Injectable()
 export class AuthService {
   private user: firebase.User;
@@ -95,4 +96,15 @@ export class AuthService {
         });
     }
   }
+
+
+ /* deleteallusers() {
+    admin.auth().getAllUsers()
+      .then( () => {
+        admin.auth().deleteAllUsers();
+      })
+      .catch( error => console.log(error.message) );
+  }*/
+
+
 }

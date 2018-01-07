@@ -37,6 +37,7 @@ export class DarkPage {
       from: this.auth.getName(),
       picprofile: this.auth.getUidPic(),
       text: messageD,
+      uid: this.auth.getUserId()
     }).then(()=>
       this.content.scrollToTop(300)
     );
