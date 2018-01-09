@@ -1,3 +1,4 @@
+
 <ion-content class="background">
   <form (ngSubmit)="login()" [formGroup]="form">
     <ion-card>
@@ -20,11 +21,11 @@
           <div class="spacer" style="height: 10px;"></div>
           <p>OR</p>
           <div class="spacer" style="height: 10px;"></div>
-          <button ion-button clear full color="light" (click)="signInWithGoogle()">
+         <!-- &lt;!&ndash;<button ion-button clear full color="light" (click)="onSignInWithGoogle()">
             Nuke Auth
-          </button>
+          </button>&ndash;&gt;-->
           <button ion-button clear full color="light" (click)="signup()">Don't have an account? Sign up</button>
-          <button ion-button clear full color="light" (click)="signInWithGoogle()">
+          <button ion-button clear full color="light" (click)="onSignInWithGoogle()">
             <ion-icon name="logo-googleplus"></ion-icon>
             Login with Google
           </button>

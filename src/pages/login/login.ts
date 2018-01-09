@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController} from 'ionic-angular';
-/*
-import { usercreds } from '../../models/interfaces/usercreds';
-import { AuthProvider } from '../../providers/auth/auth';
-import * as firebase from "firebase";*/
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SignupPage} from "../signup/signup";
 import {PasswordresetPage} from "../passwordreset/passwordreset";
@@ -11,12 +7,13 @@ import {AuthService} from "../../providers/services/auth.services";
 import {TabsPage} from "../tabs/tabs";
 import {GooglePlus} from "@ionic-native/google-plus";
 import * as firebase from "firebase/app";
-/**
- * Generated class for the LoginPage page.
+import {UserProvider} from "../../providers/user/user";
+
+/* * Generated class for the LoginPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+ * on Ionic pages and navigation.*/
+
 
 @IonicPage()
 @Component({
@@ -24,28 +21,26 @@ import * as firebase from "firebase/app";
   templateUrl: 'login.html',
 })
 export class LoginPage {
- /* credentials = {} as usercreds;
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public authservice: AuthProvider) {
-  }*/
   form: FormGroup;
   loginError: string;
-  fireauth = firebase.auth();
   userProfile: any = null;
-  constructor(
-    public googleplus: GooglePlus,
-    private navCtrl: NavController,
-    private auth: AuthService,
-    fb: FormBuilder
-  ) {
+  newuser = {
+    email: '',
+    password: '',
+    displayName: '',
+  };
+  constructor(public googleplus: GooglePlus,
+              private navCtrl: NavController,
+              private auth: AuthService,
+              public user: UserProvider,
+              fb: FormBuilder) {
 
     this.form = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
-   firebase.auth().onAuthStateChanged( user => {
-      if (user){
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
         this.userProfile = user;
       } else {
         this.userProfile = null;
@@ -72,44 +67,27 @@ export class LoginPage {
   }
 
 
-/*
-  loginWithFacebook() {
-    this.auth.signInWithFacebook()
-      .then(
-        () => this.navCtrl.setRoot(LightPage),
-        error => console.log(error.message)
-      );
-  }*/
-
-
-
-  signInWithGoogle() {
-    this.googleplus.login({
-      'webClientId': '73724290118-et73usq9p6hi21emsrqpgqr64hoglimg.apps.googleusercontent.com',
-    }).then( (res) => {
-      const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken); // esta tomando esas credenciales para logearce
-
-// CHECK HERE
-
-
-      this.fireauth.signInWithCredential(firecreds).then(() => { // esta logeandoce
-        this.navCtrl.setRoot(TabsPage);
-      }).catch((err) => {
-        alert('Auth Failed' + err)
-      })
-    }).catch((err) => {
-      alert('Error' + err);
-    })
+ /*   loginWithFacebook() {
+      this.auth.signInWithFacebook()
+        .then(
+          () => this.navCtrl.setRoot(LightPage),
+          error => console.log(error.message)
+        );
     }
+*/
 
-/*
-  loginWithTwitter() {
-    this.auth.signInWithTwitter()
-      .then(
-        () => this.navCtrl.setRoot(LightPage),
-        error => console.log(error.message)
-      );
-  }*/
+  onSignInWithGoogle() {
+    this.user.signInWithGoogle(this.newuser);
+    this.navCtrl.setRoot(TabsPage);
+  }
+
+ /*   loginWithTwitter() {
+      this.auth.signInWithTwitter()
+        .then(
+          () => this.navCtrl.setRoot(LightPage),
+          error => console.log(error.message)
+        );
+    }*/
 
   signup() {
     this.navCtrl.push(SignupPage);
@@ -118,63 +96,5 @@ export class LoginPage {
   resetPassword() {
     this.navCtrl.push(PasswordresetPage);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-  signin() {
-    this.authservice.login(this.credentials).then((res: any) => {
-      if (!res.code)
-        this.navCtrl.setRoot('TabsPage');
-      else
-        alert(res);
-    })
-  }
-
-  signup() {
-    this.navCtrl.push('SignupPage');
-  }
-
-  logout() {
-    firebase.auth().signOut().then(() => {
-      this.navCtrl.parent.parent.setRoot('LoginPage'); // parent known why? search
-    })
-  }
-  passwordreset() {
-    this.navCtrl.push('PasswordresetPage');
-  }*/
 }
+

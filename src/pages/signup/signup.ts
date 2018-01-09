@@ -1,12 +1,13 @@
+
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, LoadingController, ToastController, Content} from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-/**
+/*/!**
  * Generated class for the SignupPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
- */
+ *!/*/
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -17,7 +18,7 @@ export class SignupPage {
   newuser = {
     email: '',
     password: '',
-    displayName: '',
+    displayName: 'Trekkie',
   };
 
   constructor(public navCtrl: NavController,
@@ -28,12 +29,8 @@ export class SignupPage {
   }
 
   ionViewWillEnter() {
-    {
-      setTimeout(() => {
-        this.content.scrollToTop();
-      }, 1000);
-    }
   }
+
   signup() {
     let toaster = this.toastCtrl.create({
       duration: 3000,
@@ -47,10 +44,10 @@ export class SignupPage {
       toaster.setMessage('Password is not strong. Try giving more than six characters'); //check this
       toaster.present();
     }
-   /* else if (this.newuser.email = email) {
-      toaster.setMessage('Invalid Email Field'); //check this
-      toaster.present();
-    }*/
+   /* /!* else if (this.newuser.email = email) {
+       toaster.setMessage('Invalid Email Field'); //check this
+       toaster.present();
+     }*!/*/
     else {
       let loader = this.loadingCtrl.create({
         content: 'Please wait'
@@ -59,12 +56,12 @@ export class SignupPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          //group = getgroup(id_grupo)
-          //group.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
-          //group1 = getgroup(id_grupo2)
-          //group1.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
-          //group2 = getgroup(id_grupo3)
-          //group2.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
+        //group = getgroup(id_grupo)
+        //group.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
+        //group1 = getgroup(id_grupo2)
+        //group1.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
+        //group2 = getgroup(id_grupo3)
+        //group2.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
           this.navCtrl.push('ProfilePage'); // check this!
         else {
           let loader = this.loadingCtrl.create({
@@ -81,10 +78,9 @@ export class SignupPage {
     this.navCtrl.setRoot('LoginPage');
   }
 
-  validateEmail(email) {
+/*  /!*validateEmail(email) {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.toLowerCase());
-  }
+  }*!/*/
 
 }
-
