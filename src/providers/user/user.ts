@@ -14,15 +14,20 @@ export class UserProvider {
   firedata = firebase.database().ref('/users'); //reference for the user data base
   token: string;
   randomImg = [
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/wokie.jpg?alt=media&token=4333659b-8ee8-4850-8ce3-a12f30ab1762',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/yoda.jpg?alt=media&token=324dcf30-11a1-4929-9c22-5128e8f27443',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/star-wars-1386790_960_720.png?alt=media&token=3cf643d3-acf1-4a54-a423-7030746c4dca'
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2F6191456450_e15c906b8f_z.jpg?alt=media&token=3689cde4-064d-41a4-a9a3-b58db96e35e6',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FDisney-logo%20(1).jpg?alt=media&token=2a6ed1a7-7914-45a6-831d-f5dac51ad8ca',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FKylo_Ren_cosplayer_(22969075254).jpg?alt=media&token=d268b288-0958-4e23-b770-5a1490488631',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2Fstar-wars-1386790_960_720.png?alt=media&token=77fd695d-7ebf-4eeb-beea-e4a6e6fb09cd',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2Fwokie.jpg?alt=media&token=bb10918e-9e9e-40f3-b9db-6ba83271b1ab',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FWondercon_2016_-_Rey_Cosplay_(26014546051)%20(1).jpg?alt=media&token=4de7f769-902c-4aa2-8dde-264206b1f864',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2Fyoda.jpg?alt=media&token=67952aa6-4edc-45f1-bc12-aff0a4bad793',
+    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FSWCA_-_Kenny_Baker_model_(17202872135).jpg?alt=media&token=7b352120-d72b-46b1-94a4-5032b1ef4625'
   ];
   selectedImgArray = [];
   constructor(public afireauth: AngularFireAuth, public googleplus: GooglePlus) {}
 
   public selectedImg() {
-    for(let i=0; i<4; i++) { // for loop para ir contando entre el index de cada objeto
+    for(let i=0; i<8; i++) { // for loop para ir contando entre el index de cada objeto
       // Get a random IMG from that list
       let randomImg = this.getRandomImg(this.selectedImgArray); // creamos una variable local dentro de selectedImg function
       // push the the final object to the random IMG
