@@ -77,7 +77,7 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "com.apps.googleusercontent.73724290118-et73usq9p6hi21emsrqpgqr64hoglimg"
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.73724290118-et73usq9p6hi21emsrqpgqr64hoglimg"
       }
     },
     "platforms": [
