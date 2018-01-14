@@ -8,6 +8,7 @@ import {TabsPage} from "../tabs/tabs";
 import {GooglePlus} from "@ionic-native/google-plus";
 import * as firebase from "firebase/app";
 import {UserProvider} from "../../providers/user/user";
+import {AngularFireAuth} from "angularfire2/auth";
 
 /* * Generated class for the LoginPage page.
  *
@@ -28,11 +29,15 @@ export class LoginPage {
     email: '',
     password: '',
     displayName: '',
+    photoUrl: ''
   };
+
+  firedata = firebase.database().ref('/users');
   constructor(public googleplus: GooglePlus,
               private navCtrl: NavController,
               private auth: AuthService,
               public user: UserProvider,
+              public afireauth: AngularFireAuth,
               fb: FormBuilder) {
 
     this.form = fb.group({
@@ -76,9 +81,23 @@ export class LoginPage {
     }
 */
 
+
   onSignInWithGoogle() {
     this.user.signInWithGoogle(this.newuser);
-    this.navCtrl.setRoot(TabsPage);
+    if(this.user.isAuthenticated()) {
+      this.afireauth.auth.currentUser.updateProfile({
+        displayName: 'Trekkie',
+        photoURL: this.user.getRandomImg(this.user.randomImg)
+      }).then(() => {
+        this.firedata.child(this.afireauth.auth.currentUser.uid).set({
+          uid: this.afireauth.auth.currentUser.uid,
+          displayName: 'Trekkie',
+          photoURL: this.user.getRandomImg(this.user.randomImg)
+        })
+      });
+    }
+
+    this.navCtrl.setRoot(TabsPage)
   }
 
  /*   loginWithTwitter() {
@@ -96,5 +115,10 @@ export class LoginPage {
   resetPassword() {
     this.navCtrl.push(PasswordresetPage);
   }
+
+
+
+
+
 }
 

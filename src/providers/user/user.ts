@@ -12,6 +12,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
 export class UserProvider {
   fireauth = firebase.auth();
   firedata = firebase.database().ref('/users'); //reference for the user data base
+  storetokens = firebase.database().ref('/token');
   token: string;
   randomImg = [
     'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2F6191456450_e15c906b8f_z.jpg?alt=media&token=3689cde4-064d-41a4-a9a3-b58db96e35e6',
@@ -47,9 +48,15 @@ export class UserProvider {
 
    */
 
+
+
   adduser(newuser) {
     let promise = new Promise((resolve, reject) => { // let
       this.afireauth.auth.createUserWithEmailAndPassword(newuser.email, newuser.password).then(() => { // pasa email and password
+        firebase.auth().currentUser.getToken()
+          .then(
+            (token: string) => this.token = token // with the user value we convert it in a token
+          )
         this.afireauth.auth.currentUser.updateProfile({
           displayName: newuser.displayName,
           photoURL: this.getRandomImg(this.randomImg)
@@ -80,27 +87,50 @@ export class UserProvider {
       'webClientId': '73724290118-et73usq9p6hi21emsrqpgqr64hoglimg.apps.googleusercontent.com',
     }).then( (res) => {
       const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken); // esta tomando esas credenciales para logearce, credentials es para pasar el tocken
-      this.fireauth.signInWithCredential(firecreds).then(() => { // esta logeandoce
+      this.fireauth.signInWithCredential(firecreds).then(() => { // toma las credenciales de google para pasarlas a firebase
         // pasa email and password
-        this.afireauth.auth.currentUser.updateProfile({
-          displayName: 'Trekkie',
-          photoURL: this.getRandomImg(this.randomImg)
-        }).then(() => {
-          this.firedata.child(this.afireauth.auth.currentUser.uid).set({
-            uid: this.afireauth.auth.currentUser.uid,
-            displayName: 'Trekkie',
-            photoURL: this.getRandomImg(this.randomImg)
-          })
-        })
+        // simpre va a tener las credenciales porq las toma de google lo que necesito es
+            firebase.auth().currentUser.getToken()
+              .then(
+                (token: string) => this.token = token // with the user value we convert it in a token
+              )
+          }
+        )
       }).catch((err) => {
         alert('Auth Failed' + err)
-      })
-    }).catch((err) => {
+      }).catch((err) => {
       alert('Error' + err);
     })
   }
-// bueno calm down una de las posibilidades es tomar el token
 
+  isAuthenticated() {
+    return this.token != null;
+  }
+
+
+  getToken() {  // check
+    firebase.auth().currentUser.getToken()
+      .then(
+        (token: string) => this.token = token
+      );
+    return this.token
+  }
+
+  logout() {// to know the user is logout we need to tell to our backend
+    const token =  this.getToken();
+    this.storetokens.set({
+      token: token
+    }).then(() => {
+      firebase.auth().signOut().then(() => {
+        this.googleplus.logout()// this sent to the login page with the navcrl
+      })
+    })
+  }
+
+
+
+
+// bueno calm down una de las posibilidades es tomar el token
 
 
 
@@ -121,13 +151,6 @@ export class UserProvider {
       )
   }*/
 
-  getToken() {  // check
-    firebase.auth().currentUser.getToken()
-      .then(
-        (token: string) => this.token = token
-      );
-    return this.token
-  }
 
 
 
@@ -219,7 +242,6 @@ export class UserProvider {
     })
     return promise;
   }
-
 
 
 

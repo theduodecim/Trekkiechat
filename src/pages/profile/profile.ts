@@ -2,7 +2,6 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
 import { UserProvider } from '../../providers/user/user';
-import firebase from 'firebase';
 import {GooglePlus} from "@ionic-native/google-plus";
 /**
  * Generated class for the ProfilePage page.
@@ -20,7 +19,7 @@ export class ProfilePage {
   displayName: string;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public userservice: UserProvider,
+              public user: UserProvider,
               public zone: NgZone, // import zone to see the real effect
               public alertCtrl: AlertController, // here we imported an alert Controller
               public imghandler: ImghandlerProvider,
@@ -34,7 +33,7 @@ export class ProfilePage {
 
   //this is the function to load the new update the avatar and the name in the profile tab
   loaduserdetails() {
-    this.userservice.getuserdetails()
+    this.user.getuserdetails()
       .then((res: any) => {
       this.displayName = res.displayName; //
       this.zone.run(() => { // zone is using to see the real efect when the avatar is uploaded and the name
@@ -43,12 +42,15 @@ export class ProfilePage {
     })
   }
 
+
+
+
   editimage() { //this is the alert to update the img
     let statusalert = this.alertCtrl.create({
       buttons: ['okay']
     });
     this.imghandler.uploadimage().then((url: any) => {
-      this.userservice.updateimage(url).then((res: any) => {
+      this.user.updateimage(url).then((res: any) => {
         if (res.success) {
           statusalert.setTitle('Updated');
           statusalert.setSubTitle('Your profile pic has been changed successfully!!');
@@ -64,6 +66,9 @@ export class ProfilePage {
       })
     })
   }
+
+
+
 
   editname() { // here we are creating an alert to change the nickname
     let statusalert = this.alertCtrl.create({
@@ -85,7 +90,7 @@ export class ProfilePage {
           text: 'Edit',
           handler: data => { // here we store the data of the nickname
             if (data.nickname) {
-              this.userservice.updatedisplayname(data.nickname).then((res: any) => {
+              this.user.updatedisplayname(data.nickname).then((res: any) => {
                 if (res.success) {
                   statusalert.setTitle('Updated');
                   statusalert.setSubTitle('Your nickname has been changed');
@@ -107,12 +112,9 @@ export class ProfilePage {
     alert.present();
   }
 
-  logout() {  // to know the user is logout we need to tell to our backend
-    firebase.auth().signOut().then(() => {
-      this.navCtrl.parent.parent.setRoot('LoginPage');
-      this.googleplus.logout()// this sent to the login page with the navcrl
-    })
+  onLogout() {
+    this.user.logout();
+    this.navCtrl.parent.parent.setRoot('LoginPage');
   }
-
 
 }
