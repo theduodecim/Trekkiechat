@@ -113,8 +113,26 @@ export class ProfilePage {
   }
 
   onLogout() {
-    this.user.logout();
-    this.navCtrl.parent.parent.setRoot('LoginPage');
+    let alert = this.alertCtrl.create({   // this is a basic structure to create an alert
+      title: 'Log Out',
+      subTitle: 'are you sure to logout?, Google Accounts will lose the nickname and picture',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+        }
+      },
+        {
+          text: 'okay',
+          handler: data => {
+            this.user.logout();
+            this.navCtrl.parent.parent.setRoot('LoginPage');
+          }
+        }]
+    })
+    alert.present();
   }
 
+
 }
+
