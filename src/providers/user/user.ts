@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
 import {GooglePlus} from "@ionic-native/google-plus";
+import {OneSignal} from "@ionic-native/onesignal";
+import {Platform} from "ionic-angular";
+import {AuthService} from "../services/auth.services";
 /*
   Generated class for the UserProvider provider.
 
@@ -11,7 +14,8 @@ import {GooglePlus} from "@ionic-native/google-plus";
 @Injectable() //Remember this is for add providers to our provider
 export class UserProvider {
   fireauth = firebase.auth();
-  firedata = firebase.database().ref('/users'); //reference for the user data base
+  firedata = firebase.database().ref('/users');
+  onesignalDeviceId = firebase.database().ref('users/');//reference for the user data base
   storetokens = firebase.database().ref('/token');
   token: string;
   randomImg = [
@@ -25,7 +29,7 @@ export class UserProvider {
     'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FSWCA_-_Kenny_Baker_model_(17202872135).jpg?alt=media&token=7b352120-d72b-46b1-94a4-5032b1ef4625'
   ];
   selectedImgArray = [];
-  constructor(public afireauth: AngularFireAuth, public googleplus: GooglePlus) {}
+  constructor(public afireauth: AngularFireAuth, public googleplus: GooglePlus, public one: OneSignal, public platform: Platform, public auth: AuthService) {}
 
   public selectedImg() {
     for(let i=0; i<8; i++) { // for loop para ir contando entre el index de cada objeto
@@ -61,10 +65,26 @@ export class UserProvider {
           displayName: newuser.displayName,
           photoURL: this.getRandomImg(this.randomImg)
         }).then(() => {
-          this.firedata.child(this.afireauth.auth.currentUser.uid).set({
+          this.onesignalDeviceId.child(this.afireauth.auth.currentUser.uid).set({
             uid: this.afireauth.auth.currentUser.uid,
             displayName: newuser.displayName,
             photoURL: this.getRandomImg(this.randomImg)
+
+          }).then(() => {
+            if (this.platform.is('cordova')) {
+              //Get the Id
+              this.one.getIds().then(success => {
+                //Update  the database with onesignal_ID
+                this.onesignalDeviceId.update({
+                  onesignal_ID: success.userId
+                })
+              })
+
+            } else {
+              this.firedata.update({
+                onesignal_ID: '73724290118'
+              });
+            }
           }).then(() => {
             resolve({ success: true });
           }).catch((err) => {
@@ -117,14 +137,16 @@ export class UserProvider {
   }
 
   logout() {// to know the user is logout we need to tell to our backend
-    const token =  this.getToken();
+
+    //save the token in firebase?
+    /*  const token =  this.getToken();
     this.storetokens.set({
       token: token
-    }).then(() => {
+    }).then(() => {*/
       firebase.auth().signOut().then(() => {
         this.googleplus.logout()// this sent to the login page with the navcrl
       })
-    })
+  /*  })*/
   }
 
 
@@ -213,7 +235,7 @@ export class UserProvider {
     let promise = new Promise((resolve, reject) => { // let
       this.firedata.child(firebase.auth().currentUser.uid) // reference for the user data base
         .once('value', (snapshot) => {
-          resolve(snapshot.val());
+          resolve(snapshot.val())
         }).catch((err) => {
         reject(err);
       })

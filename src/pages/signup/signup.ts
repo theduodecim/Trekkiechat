@@ -2,6 +2,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, LoadingController, ToastController, Content} from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import {TabsPage} from "../tabs/tabs";
 /*/!**
  * Generated class for the SignupPage page.
  *
@@ -62,7 +63,7 @@ export class SignupPage {
         //group1.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
         //group2 = getgroup(id_grupo3)
         //group2.addgroupmember(id de nuevo usuario, lo que pida la funcioan)
-          this.navCtrl.push('ProfilePage'); // check this!
+          this.navCtrl.setRoot(TabsPage); // check this!
         else {
           let loader = this.loadingCtrl.create({
             content: '???'

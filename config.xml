@@ -90,4 +90,5 @@
     <plugin name="cordova-plugin-googleplus" spec="git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.73724290118-et73usq9p6hi21emsrqpgqr64hoglimg" />
     </plugin>
+    <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
 </widget>

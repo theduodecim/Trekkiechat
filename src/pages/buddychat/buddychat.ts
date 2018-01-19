@@ -1,12 +1,18 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { IonicPage, NavController,
+import {
+  IonicPage, NavController,
   NavParams,
   Events,
   Content,
-  LoadingController } from 'ionic-angular'; //loading controller to show the loading animation
+  LoadingController, Platform
+} from 'ionic-angular'; //loading controller to show the loading animation
 import { ChatProvider } from '../../providers/chat/chat';
 import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
 import firebase from 'firebase';
+import {OneSignal} from "@ionic-native/onesignal";
+import {AuthService} from "../../providers/services/auth.services";
+
+
 /**
  * Generated class for the BuddychatPage page.
  *
@@ -24,14 +30,22 @@ export class BuddychatPage {
   newmessage;
   allmessages = [];
   photoURL;
+  token = this.auth.token;
+  onesignalemail = this.auth.getEmail();
+  uid = firebase.auth().currentUser.uid;
+  reciever_ID = [];
+  onesignalDeviceId = firebase.database().ref('users/');
   imgornot; // this will convert our image in a image without this will be only an string
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public auth: AuthService,
               public chatservice: ChatProvider,
               public events: Events,
               public zone: NgZone,
               public loadingCtrl: LoadingController,
-              public imgstore: ImghandlerProvider) {
+              public imgstore: ImghandlerProvider,
+              public one: OneSignal,
+              public platform: Platform) {
 
     this.buddy = this.chatservice.buddy;
     this.photoURL = firebase.auth().currentUser.photoURL;
@@ -48,17 +62,89 @@ export class BuddychatPage {
             this.imgornot.push(false); // if not this will not run
         }
       })
-
-
     })
   }
+
+  ionViewWillEnter() {
+
+  }
+
+
+
+ /* getonesightId(oneSId) {
+    this.one.getIds().then(ids => {
+      console.log(JSON.stringify(ids['userId']));
+
+    });
+  }*/
+
+
+
+ onesignalTag() {
+   this.one.sendTags(this.onesignalemail)
+ }
+
+OneSighId () {
+  if (this.platform.is('cordova')) {
+    //Get the Id
+    this.one.getIds().then(success => {
+      //Update  the database with onesignal_ID
+      this.onesignalDeviceId.update({
+        onesignal_ID: success.userId
+      })
+    })
+
+  } else {
+    this.onesignalDeviceId.update({
+      onesignal_ID: '73724290118'
+    });
+  }
+}
+
+
 
   addmessage() {
     this.chatservice.addnewmessage(this.newmessage).then(() => {
       this.content.scrollToBottom();
       this.newmessage = '';  //?
-    })
+      this.Send_Push_Notification_To_Available_Users()
+      })
   }
+
+  Send_Push_Notification_To_Available_Users(){
+    //Make refrence to the users database, under the node UserProfile
+    ///Push The Notification
+
+    if (this.platform.is('cordova')) {
+      let notificationObj:any = {
+        include_player_ids: this.onesignalDeviceId,
+        contents: {en:  this.newmessage = ''},
+      };
+
+      this.one.postNotification(notificationObj).then( success => {
+        console.log("Notification Post Success:", success);
+      }, error => {
+        console.log(error);
+        alert("Notification Post Failed:\n" + JSON.stringify(error));
+      });
+
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   ionViewDidEnter() {
     this.chatservice.getbuddymessages();

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { ImghandlerProvider } from '../../providers/imghandler/imghandler';
 import { UserProvider } from '../../providers/user/user';
 import {GooglePlus} from "@ionic-native/google-plus";
+import {AuthService} from "../../providers/services/auth.services";
+import * as firebase from "firebase/app";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -17,13 +19,23 @@ import {GooglePlus} from "@ionic-native/google-plus";
 export class ProfilePage {
   avatar: string;  //
   displayName: string;
+  userProfile: any = null;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public user: UserProvider,
               public zone: NgZone, // import zone to see the real effect
               public alertCtrl: AlertController, // here we imported an alert Controller
               public imghandler: ImghandlerProvider,
-              public googleplus: GooglePlus) {
+              public googleplus: GooglePlus,
+              public auth: AuthService) {
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.userProfile = user;
+      } else {
+        this.userProfile = null;
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -35,13 +47,10 @@ export class ProfilePage {
   loaduserdetails() {
     this.user.getuserdetails()
       .then((res: any) => {
+      this.auth.getUidPic();
       this.displayName = res.displayName; //
-      this.zone.run(() => { // zone is using to see the real efect when the avatar is uploaded and the name
-        this.avatar = res.photoURL; //
-      })
     })
   }
-
 
 
 

@@ -1,8 +1,10 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, NgZone, ViewChild} from '@angular/core';
 import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
 import {DataService} from "../../providers/services/data.services";
 import {AuthService} from "../../providers/services/auth.services";
+import {AvatarprofilesPage} from "../avatarprofiles/avatarprofiles";
+import {UserProvider} from "../../providers/user/user";
 
 /**
  * Generated class for the LightPage page.
@@ -22,15 +24,24 @@ export class LightPage{
   messages$: FirebaseListObservable<any[]>;
   placeholderText: string = 'Enter a message';
   @ViewChild(Content) content: Content;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
+  constructor(public user: UserProvider, public zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
     this.item = navParams.get('item');
     this.messages$ = data.getChatMessages(this.$key);
+  }
+
+
+  public itemTapped(item) {
+    this.navCtrl.push(AvatarprofilesPage, {
+      item: item
+    });
   }
 
 
   addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage
     this.navCtrl.push('ChatsPage');
   }
+
+
 
   send(message: string) {
     this.messages$.push({

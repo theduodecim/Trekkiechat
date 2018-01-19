@@ -6,7 +6,6 @@ import AuthProvider = firebase.auth.AuthProvider;
 
 
 
-
 @Injectable()
 export class AuthService {
   private user: firebase.User;

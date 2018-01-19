@@ -27,6 +27,8 @@ import {LightPageModule} from "../pages/light/light.module";
 import {NgPipesModule} from "ngx-pipes";
 import {PasswordresetPage} from "../pages/passwordreset/passwordreset";
 import {GooglePlus} from "@ionic-native/google-plus";
+import {OneSignal} from "@ionic-native/onesignal";
+import {AvatarprofilesPage} from "../pages/avatarprofiles/avatarprofiles";
 /*import {GoogleService} from "../providers/services/googleservice";*/
 
 
@@ -41,6 +43,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
     SignupPage,
     TabsPage,
     PasswordresetPage,
+    AvatarprofilesPage
   ],
   imports: [
     AngularFireDatabaseModule,
@@ -58,6 +61,7 @@ import {GooglePlus} from "@ionic-native/google-plus";
     SignupPage,
     TabsPage,
     PasswordresetPage,
+    AvatarprofilesPage
   ],
   providers: [
     StatusBar,
@@ -76,7 +80,8 @@ import {GooglePlus} from "@ionic-native/google-plus";
     DataService,
     AuthService,
     AngularFireDatabase,
-    GooglePlus
+    GooglePlus,
+    OneSignal
     /*GoogleService*/
   ]
 })
