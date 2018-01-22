@@ -1,3 +1,4 @@
+/*
 import { NgModule } from '@angular/core';
 import { UserstatusComponent } from './userstatus/userstatus';
 import {CommonModule} from "@angular/common";
@@ -7,3 +8,4 @@ import {CommonModule} from "@angular/common";
 	exports: [UserstatusComponent]
 })
 export class ComponentsModule {}
+*/

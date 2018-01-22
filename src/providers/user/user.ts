@@ -19,14 +19,16 @@ export class UserProvider {
   storetokens = firebase.database().ref('/token');
   token: string;
   randomImg = [
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2F6191456450_e15c906b8f_z.jpg?alt=media&token=3689cde4-064d-41a4-a9a3-b58db96e35e6',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FDisney-logo%20(1).jpg?alt=media&token=2a6ed1a7-7914-45a6-831d-f5dac51ad8ca',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FKylo_Ren_cosplayer_(22969075254).jpg?alt=media&token=d268b288-0958-4e23-b770-5a1490488631',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2Fstar-wars-1386790_960_720.png?alt=media&token=77fd695d-7ebf-4eeb-beea-e4a6e6fb09cd',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2Fwokie.jpg?alt=media&token=bb10918e-9e9e-40f3-b9db-6ba83271b1ab',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FWondercon_2016_-_Rey_Cosplay_(26014546051)%20(1).jpg?alt=media&token=4de7f769-902c-4aa2-8dde-264206b1f864',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2Fyoda.jpg?alt=media&token=67952aa6-4edc-45f1-bc12-aff0a4bad793',
-    'https://firebasestorage.googleapis.com/v0/b/trekkiechat.appspot.com/o/UsersPicProfile%2FSWCA_-_Kenny_Baker_model_(17202872135).jpg?alt=media&token=7b352120-d72b-46b1-94a4-5032b1ef4625'
+    'http://i63.tinypic.com/2ngc56p.jpg',
+    'http://i64.tinypic.com/m9my4g.jpg',
+    'http://i68.tinypic.com/2yxk9kk.jpg',
+    'http://i64.tinypic.com/2pq5i75.jpg',
+    'http://i66.tinypic.com/16gh6hl.jpg',
+    'http://i64.tinypic.com/2igf9z7.jpg',
+    'http://i67.tinypic.com/hs6jnm.jpg',
+    'http://i66.tinypic.com/xc2bll.jpg',
+    'http://i64.tinypic.com/345h3ky.jpg',
+    'http://i66.tinypic.com/vnz0gp.jpg',
   ];
   selectedImgArray = [];
   constructor(public afireauth: AngularFireAuth, public googleplus: GooglePlus, public one: OneSignal, public platform: Platform, public auth: AuthService) {}
@@ -284,6 +286,21 @@ export class UserProvider {
     return promise;
   }
 
+  getallpcitures() {
+    let promise = new Promise((resolve, reject) => { //let
+      this.firedata.orderByChild('photoURL').once('value', (snapshot) => {
+        let userdata = snapshot.val();
+        let temparr = [];
+        for (let key in userdata) { // let
+          temparr.push(userdata[key]);
+        }
+        resolve(temparr);
+      }).catch((err) => {
+        reject(err);
+      })
+    })
+    return promise;
+  }
 
 
 }

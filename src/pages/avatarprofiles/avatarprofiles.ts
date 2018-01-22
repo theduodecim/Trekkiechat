@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AuthService} from "../../providers/services/auth.services";
 import * as firebase from "firebase/app";
+import {UserProvider} from "../../providers/user/user";
 /**
  * Generated class for the AvatarprofilesPage page.
  *
@@ -18,14 +19,12 @@ export class AvatarprofilesPage {
   avatarPic: string;
   item: any;
   userProfile: any = null;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.userProfile = user;
-      } else {
-        this.userProfile = null;
-      }
-    });
+  filteredpictures = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public userservice: UserProvider) {
+    this.userservice.getallpcitures().then((res: any) => {
+      this.filteredpictures = res;
+
+    })
   }
 
 

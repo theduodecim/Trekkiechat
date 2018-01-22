@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import {IonicModule, IonicPageModule} from 'ionic-angular';
 import { AvatarprofilesPage } from './avatarprofiles';
 
 @NgModule({
@@ -8,6 +8,10 @@ import { AvatarprofilesPage } from './avatarprofiles';
   ],
   imports: [
     IonicPageModule.forChild(AvatarprofilesPage),
+    [IonicModule]
+  ],
+  entryComponents: [
+    AvatarprofilesPage,
   ],
 })
 export class AvatarprofilesPageModule {}

@@ -5,6 +5,9 @@ import {DataService} from "../../providers/services/data.services";
 import {AuthService} from "../../providers/services/auth.services";
 import {AvatarprofilesPage} from "../avatarprofiles/avatarprofiles";
 import {UserProvider} from "../../providers/user/user";
+/*import {OneSignalSenderService} from "../../one-signal/one-signal-sender.service";
+import {OneSignalListenerService} from "../../one-signal/one-signal-listener-service";*/
+
 
 /**
  * Generated class for the LightPage page.
@@ -21,12 +24,17 @@ import {UserProvider} from "../../providers/user/user";
 export class LightPage{
   item: any;
   $key: any;
+  message: string;
   messages$: FirebaseListObservable<any[]>;
   placeholderText: string = 'Enter a message';
+ /* private pushSenderService: OneSignalSenderService;
+  private pushListener: OneSignalListenerService;*/
   @ViewChild(Content) content: Content;
-  constructor(public user: UserProvider, public zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
+  constructor(/*pushSenderService: OneSignalSenderService, pushListener: OneSignalListenerService,*/ public user: UserProvider, public zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public data: DataService) {
     this.item = navParams.get('item');
     this.messages$ = data.getChatMessages(this.$key);
+    /*this.pushSenderService = pushSenderService;
+    this.pushListener = pushListener;*/
   }
 
 
@@ -41,7 +49,9 @@ export class LightPage{
     this.navCtrl.push('ChatsPage');
   }
 
-
+  /*sendNotification() {
+    this.pushSenderService.send(this.message);
+  }*/
 
   send(message: string) {
     this.messages$.push({
@@ -49,17 +59,18 @@ export class LightPage{
       from: this.auth.getName(),
       picprofile: this.auth.getUidPic(),
       text: message,
-      uid: this.auth.getUserId()
+      uid: this.auth.getUserId(),
+      /*notification: this.sendNotification()*/
     }).then(()=>
       this.content.scrollToTop(300)
     );
   }
 
-  setPlaceholder(auth) {
+ /* setPlaceholder(auth) {
     if (!auth.authenticated) {
       this.placeholderText = 'Please, login to post a message';
     }
-  }
+  }*/
 
   profileEdit() {
     this.navCtrl.push('ProfilePage');

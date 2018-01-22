@@ -28,7 +28,8 @@ import {NgPipesModule} from "ngx-pipes";
 import {PasswordresetPage} from "../pages/passwordreset/passwordreset";
 import {GooglePlus} from "@ionic-native/google-plus";
 import {OneSignal} from "@ionic-native/onesignal";
-import {AvatarprofilesPage} from "../pages/avatarprofiles/avatarprofiles";
+import {OneSignalModule} from "../one-signal/one-signal.module";
+import {AvatarprofilesPageModule} from "../pages/avatarprofiles/avatarprofiles.module";
 /*import {GoogleService} from "../providers/services/googleservice";*/
 
 
@@ -43,7 +44,7 @@ import {AvatarprofilesPage} from "../pages/avatarprofiles/avatarprofiles";
     SignupPage,
     TabsPage,
     PasswordresetPage,
-    AvatarprofilesPage
+
   ],
   imports: [
     AngularFireDatabaseModule,
@@ -52,6 +53,8 @@ import {AvatarprofilesPage} from "../pages/avatarprofiles/avatarprofiles";
     NgPipesModule,
     LightPageModule,
     Ng2OrderModule,
+    AvatarprofilesPageModule,
+    OneSignalModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
     AngularFireModule.initializeApp(config)
   ],
@@ -61,7 +64,6 @@ import {AvatarprofilesPage} from "../pages/avatarprofiles/avatarprofiles";
     SignupPage,
     TabsPage,
     PasswordresetPage,
-    AvatarprofilesPage
   ],
   providers: [
     StatusBar,
@@ -81,7 +83,7 @@ import {AvatarprofilesPage} from "../pages/avatarprofiles/avatarprofiles";
     AuthService,
     AngularFireDatabase,
     GooglePlus,
-    OneSignal
+    OneSignal,
     /*GoogleService*/
   ]
 })

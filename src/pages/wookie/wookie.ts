@@ -43,12 +43,12 @@ export class WookiePage {
     );
   }
 
-  setPlaceholder(auth) {
+ /* setPlaceholder(auth) {
     if (!auth.authenticated) {
       this.placeholderText = 'Please, login to post a message';
     }
   }
-
+*/
   profileEdit() {
     this.navCtrl.push('ProfilePage');
   }

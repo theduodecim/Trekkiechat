@@ -1,9 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Working progress</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Avatars of Trekiechat</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <img src="{{userProfile.photoURL}}">
+<ion-content class="background">
+
+  <ion-slides>
+ <ion-slide *ngFor="let key of filteredpictures">
+    <img class="profile-image" src="{{key.photoURL}}">
+  </ion-slide>
+  </ion-slides>
+
 </ion-content>

@@ -83,7 +83,7 @@ export class ImghandlerProvider {
   })
   return promise;
 }*/
-  grouppicstore(groupname) {
+ /* grouppicstore(groupname) {
     let promise = new Promise((resolve, reject) => { // let
       this.filechooser.open().then((url) => {
         (<any>window).FilePath.resolveNativePath(url, (result) => {
@@ -111,7 +111,7 @@ export class ImghandlerProvider {
       })
     })
     return promise;
-  }
+  }*/
 
   picmsgstore() { // choosing and uploading images part 2 of uploading the image
     let promise = new Promise((resolve, reject) => { // let

@@ -11,15 +11,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
   <div class="profile-image" (click)="editimage()">
     <img src="{{userProfile.photoURL}}">
   </div>
-  <div>
+  <div class="infoname">
     <h2 (click)="editname()">{{displayName}}</h2>
   </div>
-  <div>
-    Tap on your pic or nick name to change it.
+  <div class="info">
+   <p class="rainbow">Tap on your pic or nick name to change it.</p>
   </div>
   <div class="spacer" style="height: 10px;"></div>
   <div>

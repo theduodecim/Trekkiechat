@@ -31,10 +31,10 @@ export class BuddychatPage {
   allmessages = [];
   photoURL;
   token = this.auth.token;
-  onesignalemail = this.auth.getEmail();
+ /* onesignalemail = this.auth.getEmail();*/
   uid = firebase.auth().currentUser.uid;
-  reciever_ID = [];
-  onesignalDeviceId = firebase.database().ref('users/');
+  /*reciever_ID = [];*/
+ /* onesignalDeviceId = firebase.database().ref('users/');*/
   imgornot; // this will convert our image in a image without this will be only an string
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -65,86 +65,14 @@ export class BuddychatPage {
     })
   }
 
-  ionViewWillEnter() {
-
-  }
-
-
-
- /* getonesightId(oneSId) {
-    this.one.getIds().then(ids => {
-      console.log(JSON.stringify(ids['userId']));
-
-    });
-  }*/
-
-
-
- onesignalTag() {
-   this.one.sendTags(this.onesignalemail)
- }
-
-OneSighId () {
-  if (this.platform.is('cordova')) {
-    //Get the Id
-    this.one.getIds().then(success => {
-      //Update  the database with onesignal_ID
-      this.onesignalDeviceId.update({
-        onesignal_ID: success.userId
-      })
-    })
-
-  } else {
-    this.onesignalDeviceId.update({
-      onesignal_ID: '73724290118'
-    });
-  }
-}
-
-
 
   addmessage() {
     this.chatservice.addnewmessage(this.newmessage).then(() => {
       this.content.scrollToBottom();
       this.newmessage = '';  //?
-      this.Send_Push_Notification_To_Available_Users()
-      })
+      /* this.Send_Push_Notification_To_Available_Users()*/
+    })
   }
-
-  Send_Push_Notification_To_Available_Users(){
-    //Make refrence to the users database, under the node UserProfile
-    ///Push The Notification
-
-    if (this.platform.is('cordova')) {
-      let notificationObj:any = {
-        include_player_ids: this.onesignalDeviceId,
-        contents: {en:  this.newmessage = ''},
-      };
-
-      this.one.postNotification(notificationObj).then( success => {
-        console.log("Notification Post Success:", success);
-      }, error => {
-        console.log(error);
-        alert("Notification Post Failed:\n" + JSON.stringify(error));
-      });
-
-    }
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   ionViewDidEnter() {
     this.chatservice.getbuddymessages();
@@ -172,4 +100,61 @@ OneSighId () {
       loader.dismiss();
     })
   }
+
+
+ /* getonesightId(oneSId) {
+    this.one.getIds().then(ids => {
+      console.log(JSON.stringify(ids['userId']));
+
+    });
+  }*/
+
+
+
+ /*onesignalTag() {
+   this.one.sendTags(this.onesignalemail)
+ }*/
+
+/*
+OneSighId () {
+  if (this.platform.is('cordova')) {
+    //Get the Id
+    this.one.getIds().then(success => {
+      //Update  the database with onesignal_ID
+      this.onesignalDeviceId.update({
+        onesignal_ID: success.userId
+      })
+    })
+
+  } else {
+    this.onesignalDeviceId.update({
+      onesignal_ID: '73724290118'
+    });
+  }
+}
+*/
+
+
+
+
+ /* Send_Push_Notification_To_Available_Users(){
+    //Make refrence to the users database, under the node UserProfile
+    ///Push The Notification
+
+    if (this.platform.is('cordova')) {
+      let notificationObj:any = {
+        include_player_ids: this.onesignalDeviceId,
+        contents: {en:  this.newmessage = ''},
+      };
+
+      this.one.postNotification(notificationObj).then( success => {
+        console.log("Notification Post Success:", success);
+      }, error => {
+        console.log(error);
+        alert("Notification Post Failed:\n" + JSON.stringify(error));
+      });
+
+    }*/
+
+
 }

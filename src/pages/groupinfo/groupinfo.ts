@@ -1,3 +1,4 @@
+/*
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { GroupsProvider } from '../../providers/groups/groups';
@@ -39,3 +40,4 @@ export class GroupinfoPage {
 
 
 }
+*/

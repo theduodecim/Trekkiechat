@@ -22,115 +22,41 @@ page-wookie {
   }
 
   .bubble {
-    border-radius: 15px; // change the picks of the figure
-    box-shadow: 0 0 25px #a1410d;
-
-    &::before,
-    &::after {
-      // Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts
-      border: 2px solid transparent;
-      width: 0;
-      height: 0;
-    }
-
-    // This covers the top & right borders (expands right, then down)
-    &::before {
-      top: 0;
-      left: 0;
-    }
-
-    // And this the bottom & left borders (expands left, then up)
-    &::after {
-      bottom: 0;
-      right: 0;
-    }
-
-    &:hover {
-      color: red;
-    }
-
-    // Hover styles
-    &:hover::before,
-    &:hover::after {
-      width: 100%;
-      height: 100%;
-    }
-
-    &:hover::before {
-      border-top-color: yellow; // Make borders visible
-      border-right-color: blue;
-      transition:
-        width 0.25s ease-out, // Width expands first
-        height 0.25s ease-out 0.25s; // And then height
-    }
-
-    &:hover::after {
-      border-bottom-color: red; // Make borders visible
-      border-left-color: green;
-      transition:
-        border-color 0s ease-out 0.5s, // Wait for ::before to finish before showing border
-        width 0.25s ease-out 0.5s, // And then exanding width
-        height 0.25s ease-out 0.75s; // And finally height
-    }
+    border-radius: 40px; // change the picks of the figure
+    -webkit-animation: rainbow 2s infinite;
+    box-shadow: 0 0 25px #913706;
+    border: 5px solid transparent;
+    /* Chrome, Safari, Opera */
   }
-
-  .text-right {
-    border-radius: 15px; // change the picks of the figure
-    box-shadow: 0 0 25px #6a3406;
-
-    &::before,
-    &::after {
-      // Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts
-      border: 2px solid transparent;
-      width: 0;
-      height: 0;
+    @-webkit-keyframes rainbow {
+      20% {
+        color: red;
+        box-shadow: 0 0 25px #e20003;
+      }
+      40% {
+        color: #6a3406;
+        box-shadow: 0 0 25px #a1410d;
+      }
+      60% {
+        color: #008000;
+        box-shadow: 0 0 25px #008000;
+      }
+      80% {
+        color: blue;
+        box-shadow: 0 0 25px rgba(18, 4, 255, 0.89);
+      }
+      100% {
+        color: #4a0088;
+        box-shadow: 0 0 25px #4a0088;
+      }
     }
 
-    // This covers the top & right borders (expands right, then down)
-    &::before {
-      top: 0;
-      left: 0;
+    .text-right {
+      border-radius: 40px;
+      right: auto;
+      box-shadow: 0 0 25px #913706;
+      -webkit-animation: rainbow 2s infinite;
     }
 
-    // And this the bottom & left borders (expands left, then up)
-    &::after {
-      bottom: 0;
-      right: 0;
-    }
-
-    &:hover {
-      color: orange;
-    }
-
-    // Hover styles
-    &:hover::before,
-    &:hover::after {
-      width: 100%;
-      height: 100%;
-    }
-
-    &:hover::before {
-      border-top-color: blue; // Make borders visible
-      border-right-color: black;
-      transition:
-        width 0.25s ease-out, // Width expands first
-        height 0.25s ease-out 0.25s; // And then height
-    }
-
-    &:hover::after {
-      border-bottom-color: purple; // Make borders visible
-      border-left-color: brown;
-      transition:
-        border-color 0s ease-out 0.5s, // Wait for ::before to finish before showing border
-        width 0.25s ease-out 0.5s, // And then exanding width
-        height 0.25s ease-out 0.75s; // And finally height
-      animation: 1s animateBorder infinite;
-    }
   }
-
-
-
-  // Inherits from .draw
-
-}
 

@@ -1,16 +1,17 @@
+/*
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, LoadingController, Content, Events } from 'ionic-angular';
 import { GroupsProvider } from '../../providers/groups/groups';
-/*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*/
+/!*import { ImghandlerProvider } from '../../providers/imghandler/imghandler';*!/
 import firebase from 'firebase';
 import {ImghandlerProvider} from "../../providers/imghandler/imghandler";
 
-/**
+/!**
  * Generated class for the GroupchatPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
- */
+ *!/
 @IonicPage()
 @Component({
   selector: 'page-groupchat',
@@ -45,7 +46,7 @@ export class GroupchatPage {
     }).catch((err) => {
       alert(err);
     })
-   /* this.groupservice.getgroupmsgs(this.groupName);*/
+   /!* this.groupservice.getgroupmsgs(this.groupName);*!/
     this.events.subscribe('newgroupmsg', () => {
       this.allgroupmsgs = [];
       this.imgornot = [];
@@ -79,7 +80,7 @@ export class GroupchatPage {
     console.log('ionViewDidLoad GroupchatPage');
   }
 
-  /*getingtogroup(groupname) {
+  /!*getingtogroup(groupname) {
     if(groupname != null) {
       this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) =>
       {
@@ -88,7 +89,7 @@ export class GroupchatPage {
        }
       })
     }
-  }*/
+  }*!/
 
 
 
@@ -214,3 +215,4 @@ export class GroupchatPage {
   }
 
 }
+*/

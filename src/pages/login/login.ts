@@ -59,8 +59,8 @@ export class LoginPage {
   }
 
 
-  ionViewDidEnter(){// check
-  }
+ /* ionViewDidEnter(){// check
+  }*/
 
 
 
@@ -135,7 +135,7 @@ export class LoginPage {
 
 
 
-  Update_User_Presence(){
+ /* Update_User_Presence(){
     //Make refrence to the users database, under the node UserProfile
     let _userprofile = firebase.database().ref(`/oneSignalId`);
     //check if we are running on a device.
@@ -155,7 +155,7 @@ export class LoginPage {
       })
 
     }
-  }
+  }*/
 
 
 

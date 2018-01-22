@@ -1,24 +1,24 @@
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar color="Black" class="trekkies">
     <ion-title>Trekkies</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <!-- this will span the list of our friends -->
-<ion-content>
+<ion-content class="background">
   <!-- search bar if you want add a filter of items -->
-  <ion-searchbar [(ngModel)]="searchstring" (input)="searchuser($event)" placeholder="Search"></ion-searchbar>
-  <ion-list no-lines>
+  <!--<ion-searchbar [(ngModel)]="searchstring" (input)="searchuser($event)" placeholder="Search"></ion-searchbar>-->
+  <ion-list class="itemlistbuddy" no-lines>
     <ion-list>
-      <ion-item-sliding *ngFor="let key of filteredusers">
+      <ion-item-sliding  *ngFor="let key of filteredusers">
         <!-- with the item sliding we will loop storing in the variable key the filteredusers inside of our ts -->
-        <ion-item (click)="sendreq(key)" >
+        <ion-item  (click)="sendreq(key)" >
           <ion-avatar item-left>
             <img src="{{key.photoURL}}">
           </ion-avatar>
-          <h2>{{key.displayName}}</h2>
+          <h2 class="trekiename">{{key.displayName}}</h2>
         </ion-item>
           <button ion-button color="primary" (click)="sendreq(key)"><!--
           this is to send that request and the other user will maybe accept or not -->

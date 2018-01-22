@@ -1,3 +1,55 @@
 page-buddies {
+  .trekkies {
+    -webkit-animation: rainbow 2s infinite;
 
+  }
+
+  @-webkit-keyframes rainbow {
+    20% {
+      color: red;
+      box-shadow: 0 0 25px #e20003;
+    }
+    40% {
+      color: #6a3406;
+      box-shadow: 0 0 25px #a1410d;
+    }
+    60% {
+      color: #008000;
+      box-shadow: 0 0 25px #008000;
+    }
+    80% {
+      color: blue;
+      box-shadow: 0 0 25px rgba(18, 4, 255, 0.89);
+    }
+    100% {
+      color: #4a0088;
+      box-shadow: 0 0 25px #4a0088;
+    }
+  }
+
+
+  .background {
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size:     cover;
+    background-image: url('http://i68.tinypic.com/vxdg89.jpg');
+  }
+
+
+  .itemlistbuddy {
+    background: transparent !important;
+  }
+  ion-item-sliding {
+    background: transparent !important;
+  }
+  ion-item{
+    background: transparent !important;
+  }
+  ion-list{
+    background: transparent !important;
+  }
+
+  .trekiename {
+    color: gold;
+  }
 }

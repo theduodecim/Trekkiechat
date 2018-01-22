@@ -1,3 +1,4 @@
+/*
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { GroupchatPage } from './groupchat';
@@ -11,3 +12,4 @@ import { GroupchatPage } from './groupchat';
   ],
 })
 export class GroupchatPageModule {}
+*/

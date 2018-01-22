@@ -6,19 +6,21 @@ import {Ng2OrderModule} from "ng2-order-pipe";
 
 
 
-
 @NgModule({
   declarations: [
     LightPage,
-
   ],
   imports: [
     IonicPageModule.forChild(LightPage),
-    [IonicModule, PipesModule, Ng2OrderModule],
+    [IonicModule, PipesModule, Ng2OrderModule ,/* OneSignalModule*/],
   ],
   exports: [
     LightPage,
   ],
+  providers: [
+  /*OneSignalListenerService,
+  OneSignalSenderService*/
+  ]
 })
 export class LightPageModule {}
 

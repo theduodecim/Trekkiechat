@@ -9,7 +9,7 @@ import {OneSignal} from "@ionic-native/onesignal";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = 'LoginPage';
+  rootPage: string = 'LoginPage';
   pages;
 
   constructor( public platform: Platform, public  statusBar: StatusBar, public splashScreen: SplashScreen, public one: OneSignal) {
