@@ -1,3 +1,4 @@
+/*
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { NewgroupPage } from './newgroup';
@@ -11,3 +12,4 @@ import { NewgroupPage } from './newgroup';
   ],
 })
 export class NewgroupPageModule {}
+*/

@@ -38,7 +38,7 @@ export class GroupsProvider {
     });
     return promise;
   }
-  getmygroups() {
+ /* getmygroups() {
     this.firegroup.child(firebase.auth().currentUser.uid).once('value', (snapshot) => {
       this.mygroups = [];
       if(snapshot.val() != null) {
@@ -54,7 +54,7 @@ export class GroupsProvider {
       this.events.publish('allmygroups');
     })
 
-  }
+  }*/
 
   getintogroup(groupname) {
     // when the user tabs particular group we are getting
@@ -75,7 +75,7 @@ export class GroupsProvider {
     }
   }
 
-  getownership(groupname) {
+ /* getownership(groupname) {
     let promise = new Promise((resolve, reject) => {
       this.firegroup.child(firebase.auth().currentUser.uid).child(groupname).once('value', (snapshot) => { // let
         let temp = snapshot.val().owner; // let
@@ -90,7 +90,7 @@ export class GroupsProvider {
       })
     });
     return promise;
-  }
+  }*/
 
   getgroupimage() { // episode 13
     return new Promise((resolve, reject) => {
@@ -105,7 +105,7 @@ export class GroupsProvider {
 
 
 
-  addmember(newmember) { // addign the member THE GOLD MEMBER
+  /*addmember(newmember) { // addign the member THE GOLD MEMBER
     this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname)
       .child('members').push(newmember).then(() => {
       this.getgroupimage().then(() => {
@@ -119,9 +119,11 @@ export class GroupsProvider {
       });
       this.getintogroup(this.currentgroupname);
     });
-  }
+  }*/
 
-  deletemember(member) {
+
+  //  check this for an update
+ /* deletemember(member) {
     this.firegroup.child(firebase.auth().currentUser.uid).child(this.currentgroupname)
       .child('members').orderByChild('uid').equalTo(member.uid).once('value', (snapshot) => {
       snapshot.ref.remove().then(() => {
@@ -130,7 +132,7 @@ export class GroupsProvider {
         })
       })
     })
-  }
+  }*/
 
 
   getgroupmembers() {

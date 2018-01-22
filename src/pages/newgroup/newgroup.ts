@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+/*mport { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { GroupsProvider } from '../../providers/groups/groups';
 import { ImghandlerProvider } from "../../providers/imghandler/imghandler";
 
-/**
+/!**
  * Generated class for the NewgroupPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
- */
+ *!/
 @IonicPage()
 @Component({
   selector: 'page-newgroup',
@@ -94,4 +94,4 @@ export class NewgroupPage {
     alert.present();
   }
 
-}
+}*/

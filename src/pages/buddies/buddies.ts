@@ -44,7 +44,7 @@ export class BuddiesPage {
 
 
 
-  searchuser(searchbar) { //we create a function to take our search bar in the template
+ /* searchuser(searchbar) { //we create a function to take our search bar in the template
     this.filteredusers = this.temparr;
     let q = searchbar.target.value; // let  // this seems to take the value of the searchbar
     if (q.trim() == '') { // trim?
@@ -57,7 +57,7 @@ export class BuddiesPage {
       }
       return false;
     })
-  }
+  }*/
 
   sendreq(recipient) { // this sends the request to add people
     this.newrequest.sender = firebase.auth().currentUser.uid;
