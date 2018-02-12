@@ -1,3 +1,10 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img src="http://i63.tinypic.com/2r7lmas.png">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
 
 <ion-content class="background">
   <form (ngSubmit)="login()" [formGroup]="form">
@@ -37,7 +44,7 @@
             <h2>{{ userProfile.displayName }}</h2>
             <h3>{{ userProfile.email }}</h3>
             <span class="span-text"><ion-icon name="md-information-circle">
-              </ion-icon>Go to ProfilePage to Logout</span>
+              </ion-icon>Tab two times to log in trekkieChat </span>
           </ion-item>
         </ion-list>
       </ion-card-content>

@@ -44,7 +44,6 @@ import {AvatarprofilesPageModule} from "../pages/avatarprofiles/avatarprofiles.m
     SignupPage,
     TabsPage,
     PasswordresetPage,
-
   ],
   imports: [
     AngularFireDatabaseModule,

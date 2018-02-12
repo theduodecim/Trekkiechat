@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Trekkie Friends</ion-title>
+  <ion-navbar color="Black">
+    <ion-title style="color: gold">Trekkie Friends</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addbuddy()"> <!-- the button to add the buddys --->
         <ion-icon name="person-add"></ion-icon> <!-- cool icon! :P --->
@@ -18,19 +18,19 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="content">
   <ion-list no-lines>
-    <ion-list-header>
+    <ion-list-header style="color: gold;  background: transparent !important;">
       Requests Slide to Left to show the options
     </ion-list-header>
-    <ion-item-sliding *ngFor="let item of myrequests">
-      <ion-item>
+    <ion-item-sliding *ngFor="let item of myrequests" style="color: gold;  background: transparent !important;">
+      <ion-item style="color: gold;  background: transparent !important;">
         <ion-avatar item-left>
           <img src="{{item.photoURL}}">
         </ion-avatar>
         <h4>{{item.displayName}}</h4>
       </ion-item>
-      <ion-item-options>
+      <ion-item-options style="color: gold;  background: transparent !important;" >
         <button ion-button color="secondary" (click)="accept(item)">
           <ion-icon name="checkmark"></ion-icon>
           ADD
@@ -41,10 +41,10 @@
         </button>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-list-header>
+    <ion-list-header style="color: gold;  background: transparent !important;">
       Friends
     </ion-list-header>
-    <ion-item *ngFor="let item of myfriends" (click)="buddychat(item)">
+    <ion-item  *ngFor="let item of myfriends" (click)="buddychat(item)" style="color: gold;  background: transparent !important;">
       <ion-avatar item-left>
         <img src={{item.photoURL}}>
       </ion-avatar>

@@ -16,7 +16,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 export class TabsPage {
 
   lightForceRoot = 'LightPage';
-  darkForceRoot = 'DarkPage';
+  darkSideRoot = 'DarkPage';
   theWookieRoot = 'WookiePage';
 
 

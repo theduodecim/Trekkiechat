@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AuthService} from "../../providers/services/auth.services";
-import * as firebase from "firebase/app";
 import {UserProvider} from "../../providers/user/user";
 /**
  * Generated class for the AvatarprofilesPage page.

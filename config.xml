@@ -15,10 +15,10 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
-    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="FadeSplashScreenDuration" value="600" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="4000" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -76,8 +76,6 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <engine name="android" spec="6.3.0" />
-    <engine name="ios" spec="4.5.4" />
     <plugin name="cordova-plugin-filepath" spec="^1.1.0" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
@@ -91,4 +89,6 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.73724290118-et73usq9p6hi21emsrqpgqr64hoglimg" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
+    <engine name="android" spec="6.3.0" />
+    <engine name="ios" spec="4.5.4" />
 </widget>

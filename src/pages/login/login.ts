@@ -36,6 +36,10 @@ export class LoginPage {
   onesignalDeviceId = firebase.database().ref('users/');
   firedata = firebase.database().ref('/users');
   token: string;
+
+ /* tabBarElement: any;*/
+  splash = true;
+
   constructor(public googleplus: GooglePlus,
               private navCtrl: NavController,
               private auth: AuthService,
@@ -44,6 +48,7 @@ export class LoginPage {
               fb: FormBuilder,
               public platform: Platform,
               public one: OneSignal) {
+    /*this.tabBarElement = document.querySelector('.tabbar');*/
 
     this.form = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -58,9 +63,13 @@ export class LoginPage {
     });
   }
 
-
- /* ionViewDidEnter(){// check
-  }*/
+  ionViewDidLoad() {
+   /* this.tabBarElement.style.display = 'none';*/
+    setTimeout(() => {
+      this.splash = false;
+    /*  this.tabBarElement.style.display = 'flex';*/
+    }, 4000);
+  }
 
 
 

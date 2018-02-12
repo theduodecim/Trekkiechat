@@ -9,7 +9,7 @@
   0 0 80px #ff0f00,
   0 0 90px #ff0f00,
   0 0 100px #ff0f00,
-  0 0 150px #ff0f00;">Dark Force</ion-title>
+  0 0 150px #ff0f00;">Dark Side</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addbuddy()"> <!-- the button to add the buddys --->
         <ion-icon name="person-add"></ion-icon> <!-- cool icon! :P --->
@@ -30,7 +30,7 @@
         <ion-item  id="msg" style="background-color: black" *ngFor="let message of (messages$ | async) | orderBy : 'createdAt': true">
           <ion-item class="bubble2" [ngClass]="{'text-right': auth.user.uid !== message.uid}">
             <!-- ng class works easy call a class from css and we can apply conditions to this class -->
-            <ion-avatar id="avatar" item-left >
+            <ion-avatar (click)="itemTapped()" id="avatar" item-left >
               <img src="{{message.picprofile}}">
             </ion-avatar>
             <h2>{{message.from}}</h2>

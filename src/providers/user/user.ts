@@ -71,8 +71,7 @@ export class UserProvider {
             uid: this.afireauth.auth.currentUser.uid,
             displayName: newuser.displayName,
             photoURL: this.getRandomImg(this.randomImg)
-
-          }).then(() => {
+          })/*.then(() => {
             if (this.platform.is('cordova')) {
               //Get the Id
               this.one.getIds().then(success => {
@@ -87,7 +86,7 @@ export class UserProvider {
                 onesignal_ID: '73724290118'
               });
             }
-          }).then(() => {
+          })*/.then(() => {
             resolve({ success: true });
           }).catch((err) => {
             reject(err);

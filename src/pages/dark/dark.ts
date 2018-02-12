@@ -3,6 +3,7 @@ import {Content, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {FirebaseListObservable} from "angularfire2/database";
 import {AuthService} from "../../providers/services/auth.services";
 import {DataService} from "../../providers/services/data.services";
+import {AvatarprofilesPage} from "../avatarprofiles/avatarprofiles";
 
 /**
  * Generated class for the DarkPage page.
@@ -26,6 +27,13 @@ export class DarkPage {
     this.item = navParams.get('item');
     this.messages$ = data.getChatMessagesD(this.$key);
   }
+
+  public itemTapped(item) {
+    this.navCtrl.push(AvatarprofilesPage, {
+      item: item
+    });
+  }
+
 
   addbuddy() { // this is to add the buddy so we add this function to send the user to the page buddiesPage
     this.navCtrl.push('ChatsPage');

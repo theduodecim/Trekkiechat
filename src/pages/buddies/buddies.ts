@@ -19,6 +19,7 @@ export class BuddiesPage {
   newrequest = {} as connreq;
   temparr = [];
   filteredusers = [];  //check the episode
+ /* userProfile: any = null;*/
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public userservice: UserProvider, // so if we are adding an friend the best approach is inject the userservices
@@ -27,6 +28,13 @@ export class BuddiesPage {
     this.userservice.getallusers().then((res: any) => {
       this.filteredusers = res;
       this.temparr = res;
+     /* firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.userProfile = user;
+        } else {
+          this.userProfile = null;
+        }
+      });*/
       // this create an temporaly array with the all users in the app,
       // this will generate lag if the user grow?
     })
