@@ -89,6 +89,6 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.73724290118-et73usq9p6hi21emsrqpgqr64hoglimg" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
-    <engine name="android" spec="6.3.0" />
+    <engine name="android" spec="^6.3.0" />
     <engine name="ios" spec="4.5.4" />
 </widget>
